@@ -110,6 +110,7 @@ const GetUserByUsername = (username) => {
     console.log("****GetUserByUsername ID User ****", username);
     return model.User.findOne({
         where: { UserName: username },
+        
         include: [
             { model: model.Gamer}, 
             { model: model.Points },

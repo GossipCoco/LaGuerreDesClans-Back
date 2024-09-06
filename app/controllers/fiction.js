@@ -38,6 +38,7 @@ Fiction.CreateANewChapter = (req, res) => {
 }
 
 Fiction.GetLastChapterOfAFiction = (req, res) => {
+  console.log("GetLastChapterOfAFiction", req.params.id)
   queries.GetLastChapterOfAFiction(req.params.id)
   .then((w) => {
     res.send({ ob: w, res: true, message: "Chapter created successfully" }).status(200);

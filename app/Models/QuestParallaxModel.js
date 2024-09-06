@@ -8,6 +8,19 @@ const QuestParallax = connection.define(
         type: DataTypes.STRING,
         primaryKey: true,
       },
+      
+      translateZ: {
+        type: DataTypes.STRING,
+      },
+      translateY: {
+        type: DataTypes.STRING,
+      },
+      translateX: {
+        type: DataTypes.STRING,
+      },
+      scale: {
+        type: DataTypes.STRING,
+      },
     },
     { freezeTableName: true, timestamps: false }
   );

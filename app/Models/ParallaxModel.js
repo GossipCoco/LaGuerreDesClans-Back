@@ -14,6 +14,18 @@ const Parallax = connection.define(
       Position: {
         type: DataTypes.STRING,
       },
+      translateZ: {
+        type: DataTypes.STRING,
+      },
+      translateY: {
+        type: DataTypes.STRING,
+      },
+      translateX: {
+        type: DataTypes.STRING,
+      },
+      scale: {
+        type: DataTypes.STRING,
+      },
     },
     { freezeTableName: true, timestamps: false }
   );
