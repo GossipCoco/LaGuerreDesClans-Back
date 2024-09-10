@@ -85,6 +85,18 @@ Game.GetAllLastFiveGames = (req, res) => {
     res.status(500).send(err);
   });
 }
+Game.GetAllGamesByCharacter = (req, res) => {
+  const id = req.params.id
+  const data = req.body
+  queries.GetAllGamesByCharacter(id, data)
+  .then((w) => {
+    // console.log(result)
+    res.status(200).send({ message: "Game created successfully", data: w });
+  })
+  .catch((err) => {   
+    res.status(500).send(err);
+  });
+}
 Game.AddANewCharacterToGameAndFiction = (req, res) => {
   queries.AddANewCharacterToGameAndFiction(req.params.id, req.body)
   .then((w) => {

@@ -13,5 +13,6 @@ router
    .get('/GetFiveLastGameByUser/:id', Game.GetFiveLastGameByUser)
    .post('/GetAllLastFiveGames', Game.GetAllLastFiveGames)
    .post('/AddANewCharacterToGameAndFiction/:id', Game.AddANewCharacterToGameAndFiction)
+   .post('/GetAllGamesByCharacter/:id', Game.GetAllGamesByCharacter)
 
 module.exports = router;
