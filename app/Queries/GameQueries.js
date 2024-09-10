@@ -179,7 +179,36 @@ const CreateANewGame = (UserId, data, imagePath) => {
                 promises.push(requestIllFic)
                 return requestIllFic
                 .then(() => {
-                  Promise.all(promises)
+                  const RequestCharacterFirst = {
+                    Id: uuidv4(),
+                    GameId: gameId,
+                    CharacterId: data.FirstCharacterId
+                  }
+                  const requestGameCharacterFirst = model.GameCharacter.create(RequestCharacterFirst)
+                  promises.push(requestGameCharacterFirst)
+                  return requestGameCharacterFirst
+                  .then(() => {
+                    const RequestCharacterSecond = {
+                      Id: uuidv4(),
+                      GameId: gameId,
+                      CharacterId: data.SecondCharacterId
+                    }
+                    const requestGameCharacterSecond = model.GameCharacter.create(RequestCharacterSecond)
+                    promises.push(requestGameCharacterSecond)
+                    return requestGameCharacterSecond
+                    .then(() => {
+                      Promise.all(promises)
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                      return Promise.reject(err);
+                    });
+                      
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    return Promise.reject(err);
+                  });
                 })
                 .catch((err) => {
                   console.log(err);
