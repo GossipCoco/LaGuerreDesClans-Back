@@ -16,6 +16,7 @@ const GetAllClans = () => {
     });
   };
   const GetClanById = (id) => {
+    console.log("**** GetClanById ****", id)
     return model.Clan.findOne({
       where: { Id: id },
       include: [
@@ -25,10 +26,11 @@ const GetAllClans = () => {
         {
           model: model.Warrior,
           attributes: ['Name'],
+          order: [["Name", "ASC"]],
           include: [
             {
               model: model.Character,
-              attributes: ['CurrentName', 'Image'],
+              attributes: ['Id','CurrentName', 'Image'],
             },
           ],
         },
