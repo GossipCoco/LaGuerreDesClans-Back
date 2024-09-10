@@ -43,6 +43,18 @@ const countAllGames = () => {
 
 const GetAllGames = (nav) => {
   console.log("**** All Games ****", nav, nav.step * nav.current, nav.step);
+
+  // return model.Fiction.findAll({
+  //   offset: nav.step * nav.current,
+  //   limit: nav.step,
+  //   order: [["Title", "ASC"]],
+  //   include: [{
+  //     model: model.Chapter
+  //   }],
+  //   include: [{ model: model.FictionIllustration}],
+  //   include:[{ model: model.Game}]
+  // })
+
   return model.Game.findAll({
     offset: nav.step * nav.current,
     limit: nav.step,
