@@ -27,8 +27,8 @@ const imagegenRouter  = require('./app/routes/imagegen');
 const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limite chaque IP à 100 requêtes par windowMs
+  windowMs: 15 * 60, // 15 minutes * 1000
+  max: 500, // limite chaque IP à 100 requêtes par windowMs
   message: 'Trop de requêtes créées à partir de cette IP, veuillez réessayer après 15 minutes'
 });
 

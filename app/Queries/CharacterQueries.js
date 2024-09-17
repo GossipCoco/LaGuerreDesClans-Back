@@ -121,9 +121,13 @@ const GetCharacterByName = (name) => {
     ],
   });
 };
-
+/**
+ * 
+ * @param {STRING} name 
+ * @returns {Object}
+ */
 const GetCharacterByNameSearch = (name) => {
-  console.log("**** Character ****", name);
+  console.log("**** GetCharacterByNameSearch ****", name);
   return model.Character.findAll({
     where: {
       Id: { [model.Utils.Op.like]: `%${name}%` },
@@ -143,7 +147,9 @@ const GetCharacterByNameSearch = (name) => {
             include: [{ model: model.Location }],
           },
         ],
-      },
+      },{
+        model: model.RelationCharacters
+      }
     ],
   });
 };
