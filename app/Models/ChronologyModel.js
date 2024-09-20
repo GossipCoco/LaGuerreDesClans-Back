@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const connection = require('../DataLayer/connectionWithSingleton');
 
-const Book = connection.define(
-  "Book",
+const Chronology = connection.define(
+  "Chronology",
   {
     Id: {
       type: DataTypes.INTEGER,
@@ -10,23 +10,16 @@ const Book = connection.define(
       autoIncrement: true,
       allowNull: false,
     },
-    createdAt: {
+    EventDate: {
       type: DataTypes.DATE,
+      allowNull: false,
+    },
+    EventType: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    Title: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    Summary: {
+    EventDescription: {
       type: DataTypes.TEXT,
-      allowNull: true,
-    },Image: {
-      type: DataTypes.STRING(255),
       allowNull: true,
     },
   },
@@ -36,4 +29,4 @@ const Book = connection.define(
   }
 );
 
-module.exports = Book;
+module.exports = Chronology;

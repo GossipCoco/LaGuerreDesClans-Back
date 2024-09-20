@@ -51,6 +51,7 @@ const Message = require('./MessageModel')
 const Gamer = require('./GamerModel')
 const Arc = require('./ArcModel')
 const Book = require('./BookModel')
+const Chronology = require('./ChronologyModel')
 
 // Exporter les modèles
 const models = {
@@ -105,6 +106,7 @@ const models = {
   Gamer,
   Arc,
   Book,
+  Chronology,
   sequelize: connection,
   Sequelize,
   Utils: {

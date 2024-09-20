@@ -5,7 +5,7 @@ ArcBook.GetAllArcsWithBooks = (req, res) => {
     query.GetAllArcsWithBooks(req.body)
     .then(w => {
         // const nbResult = Object.keys(w).length
-        console.log("w", w)
+        // console.log("w", w)
         res.send({ ob: w, res: true }).status(200)
     })
     .catch(err => {
@@ -15,11 +15,11 @@ ArcBook.GetAllArcsWithBooks = (req, res) => {
 }
 
 ArcBook.GetAllBooks = (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     query.GetAllBooks(req.body)
     .then(w => {
         // const nbResult = Object.keys(w).length
-        console.log("w", w)
+        // console.log("w", w)
         res.send({ ob: w, res: true }).status(200)
     })
     .catch(err => {

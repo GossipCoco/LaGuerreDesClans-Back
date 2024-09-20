@@ -94,6 +94,7 @@ const GetCharacterByName = (name) => {
   return model.Character.findOne({
     where: { Id: name },
     include: [
+      { model: model.Chronology},
       // { model: model.CharacterImage },
       { model: model.Grade },
       {
@@ -133,7 +134,8 @@ const GetCharacterByNameSearch = (name) => {
       Id: { [model.Utils.Op.like]: `%${name}%` },
       CurrentName: { [model.Utils.Op.like]: `%${name}%` }
     },
-    include: [
+    include: [      
+      { model: model.Chronology},
       { model: model.RelationCharacters },
       { model: model.Grade },
       {
