@@ -47,6 +47,8 @@ const {
   Faq,
   Message,
   Gamer,
+  Arc,
+  Book,
   sequelize: connection,
   Sequelize,
   Utils: {
@@ -234,6 +236,9 @@ Fiction.hasMany(FictionIllustration);
 FictionIllustration.belongsTo(Illustration, { foreignKey: "IllustrationId" });
 Illustration.hasMany(FictionIllustration);
 
+Book.belongsTo(Arc, { foreignKey: "ArcId" })
+Arc.hasMany(Book)
+
 module.exports = {
   User,
   Level,
@@ -280,6 +285,8 @@ module.exports = {
   Parallax,
   QuestParallax,
   Faq,
+  Arc,
+  Book,
   sequelize: connection,
   Sequelize,
   Utils: {
