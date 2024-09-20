@@ -56,6 +56,10 @@ const Character = connection.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    CurrentStatut: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   { freezeTableName: true, timestamps: false }
 );

@@ -46,11 +46,15 @@ const GetAllGames = (nav) => {
   return model.Game.findAll({
     offset: nav.step * nav.current,
     limit: nav.step,
+    order: [["DateCreation", "ASC"]],
+    where: {
+      TypeGameId: 'Fiction',
+    },
     include: [
       // { model: model.UserGame },
       {
         model: model.Fiction,
-        order: [["Title", "ASC"]],
+        // order: [["Title", "ASC"]],
         include: [{
           model: model.Chapter
         }],
@@ -64,14 +68,13 @@ const GetAllGamesByUser = (user, nav) => {
   return model.Game.findAll({
     offset: nav.step * nav.current,
     limit: nav.step,
-    include: [
-  
+    include: [  
       {
         model: model.Fiction,
+        // order: ['Title'],
         where: {
           UserId: { [model.Utils.Op.like]: `%${user}%` },
-        },
-        order: ['Title'],
+        },        
         include: [{ model: model.Chapter }],
         include: [{ model: model.FictionIllustration}]
       },
@@ -155,7 +158,7 @@ const CreateANewGame = (UserId, data, imagePath) => {
   const requestNewGame = {
     Id: gameId,
     DateCreation: date,
-    GameTypeId: 'Fiction'
+    TypeGameId: 'Fiction'
   };
   const firstRequest = model.Game.create(requestNewGame);
   promises.push(firstRequest);

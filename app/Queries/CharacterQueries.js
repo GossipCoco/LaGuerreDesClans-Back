@@ -134,6 +134,7 @@ const GetCharacterByNameSearch = (name) => {
       CurrentName: { [model.Utils.Op.like]: `%${name}%` }
     },
     include: [
+      { model: model.RelationCharacters },
       { model: model.Grade },
       {
         model: model.Clan,
@@ -147,9 +148,7 @@ const GetCharacterByNameSearch = (name) => {
             include: [{ model: model.Location }],
           },
         ],
-      },{
-        model: model.RelationCharacters
-      }
+      },
     ],
   });
 };
