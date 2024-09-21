@@ -140,7 +140,7 @@ const GetLastChapterOfAFiction = (FictionId) => {
 const GetFiveLastChapByUser = (usr) => {
   console.log("**** GetFiveLastChapByUser ****", usr);
   return model.Chapter.findAll({
-    limit: 2,
+    limit: 3,
     attributes: ['Id', 'Title', 'DateCreation', 'Image'],
     order: [['DateCreation', 'DESC']],
     include: [{
