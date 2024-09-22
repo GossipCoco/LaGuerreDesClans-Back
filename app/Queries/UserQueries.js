@@ -112,7 +112,6 @@ const GetUserByUsername = (username) => {
         where: { UserName: username },
         
         include: [
-            {},
             { model: model.Gamer}, 
             { model: model.Points },
             { model: model.Notification },

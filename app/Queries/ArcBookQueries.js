@@ -21,9 +21,23 @@ const GetAllBooks = (nav) =>{
         }]
     })
 }
-
+const GetBookByTitle = (title) =>{
+    console.log("************ GetBookByTitle ************", title)
+    return model.Book.findOne({
+        where: {
+            Title: title
+        },
+        include:[{
+            model: model.BookCharacter,
+            include: [{
+                model: model.Character
+            }]
+        }]
+    })
+}
 module.exports = {
     GetAllArcsWithBooks,
-    GetAllBooks
+    GetAllBooks,
+    GetBookByTitle
 
 }

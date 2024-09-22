@@ -50,6 +50,7 @@ const {
   Arc,
   Book,
   Chronology,
+  BookCharacter,
   sequelize: connection,
   Sequelize,
   Utils: {
@@ -112,6 +113,8 @@ Clan.hasMany(Warrior);
 
 Location.belongsTo(Clan,{ foreignKey: "ClanId" });
 Clan.hasMany(Location);
+
+
 
 // GAME
 
@@ -243,6 +246,12 @@ Arc.hasMany(Book)
 Chronology.belongsTo(Character, { foreignKey: 'CharacterId' });
 Character.hasMany(Chronology, { foreignKey: 'CharacterId' });
 
+BookCharacter.belongsTo(Book, {foreignKey: 'BookId'})
+Book.hasMany(BookCharacter)
+
+BookCharacter.belongsTo(Character, { foreignKey: 'CharacterId' })
+Character.hasMany(BookCharacter)
+
 module.exports = {
   User,
   Level,
@@ -292,6 +301,7 @@ module.exports = {
   Arc,
   Book,
   Chronology,
+  BookCharacter,
   sequelize: connection,
   Sequelize,
   Utils: {
