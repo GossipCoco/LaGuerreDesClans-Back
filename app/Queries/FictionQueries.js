@@ -234,7 +234,7 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
     Id: data.Id,
     Title: data.Title,
     Content: data.Content,
-    Image: imagePath,
+    Image: '/images/Fictions/'+imagePath,
     FictionId: FictionId,
     NextChapterId: null,
     DateCreation: date,

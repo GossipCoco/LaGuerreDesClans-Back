@@ -168,7 +168,7 @@ const CreateANewGame = (UserId, data, imagePath) => {
         Id: FictionId, // Nouvelle clé primaire pour Fiction
         Title: data.Title,
         Summary: data.Summary,
-        Image: imagePath,  // Use the filename from multer
+        Image: '/images/Fictions/'+imagePath,  // Use the filename from multer
         GameId: gameId,
         DateCreation: date,
         UserId: UserId
@@ -187,7 +187,7 @@ const CreateANewGame = (UserId, data, imagePath) => {
           return thirdRequest
             .then(() => {
               const requestIllustration = {
-                Id: imagePath,
+                Id: '/images/Fictions/'+imagePath,
                 DateCreation: date
               }
               const requestIllustrationCreate = model.Illustration.create(requestIllustration)
@@ -197,7 +197,7 @@ const CreateANewGame = (UserId, data, imagePath) => {
                 const requestFictionIllustration = {
                   Id: uuidv4(),
                   FictionId: FictionId,
-                  IllustrationId: imagePath
+                  IllustrationId: '/images/Fictions/'+imagePath
                 }
                 const requestIllFic = model.FictionIllustration.create(requestFictionIllustration)
                 promises.push(requestIllFic)
