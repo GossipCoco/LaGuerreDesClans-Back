@@ -98,5 +98,15 @@ Character.GetAllCharactersByUser = (req, res) => {
             res.send(err).status(500);
         });
 }
-
+Character.GetAllNamesOfAllCharacters = (req, res) => {
+    query.GetAllNamesOfAllCharacters()
+    .then((w) => {
+        // console.log(w)
+        res.send({ ob: w, res: true, message: "GetAllNamesOfAllCharacters" }).status(200);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send(err).status(500);
+    });
+}
 module.exports = Character

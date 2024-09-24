@@ -157,6 +157,31 @@ const GetCharacterByNameSearch = (name) => {
 const GetAllCharactersByNameGradeAndClan = (data) => {
   console.log("GetAllCharactersByNameGradeAndClan", data);
 }
+const GetAllNamesOfAllCharacters = async () => {
+  console.log("GetAllNamesOfAllCharacters");
+  const characterNames = await model.Character.findAll({
+    attributes: [
+      ['Id', 'Id'],
+      ['CurrentName', 'Name'],
+    ],
+    raw: true,
+  });
+
+  // Récupérer les noms et IDs depuis la table Gamer
+  const gamerNames = await model.Gamer.findAll({
+    attributes: [
+      ['Id', 'Id'],
+      ['UserName', 'Name'],
+    ],
+    raw: true,
+  });
+  const combinedNames = [...characterNames, ...gamerNames];
+
+  // Trier le tableau combiné par ordre alphabétique du nom
+  combinedNames.sort((a, b) => a.Name.localeCompare(b.Name));
+
+  return combinedNames;
+}
 const CreateANewCharacter = (data) => {
   console.log("CreateANewCharacter", data);
   const promises = [];
@@ -214,5 +239,6 @@ const CreateANewCharacter = (data) => {
     GetCharacterByName,
     GetCharacterByNameSearch,
     GetAllCharactersByNameGradeAndClan,
+    GetAllNamesOfAllCharacters,
     CreateANewCharacter
   }

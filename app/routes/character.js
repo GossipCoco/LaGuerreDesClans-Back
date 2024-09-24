@@ -10,6 +10,7 @@ router
 .get('/GetCharacterByName/:id', Character.GetCharacterByName)
 .get('/countAllcharacters', Character.countAllCharacters)
 .get('/GetAllNamesAndIdsCharacters', Character.GetAllNamesAndIdsCharacters)
+.get('/GetAllNamesOfAllCharacters', Character.GetAllNamesOfAllCharacters)
 .get('/GetAllCharactersByUser/:id', Character.GetAllCharactersByUser)
 .get('/search/:name', Character.GetCharacterByNameSearch)
 .post('/allcharacters', Character.GetAllCharacters)
