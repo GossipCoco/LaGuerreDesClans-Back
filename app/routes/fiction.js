@@ -7,11 +7,15 @@ const uploadFileMiddleware = require('../middleware/uploadImgFiction');  // Assu
 const router = express.Router();
 
 router
+
    .post('/:id', Fiction.GetAllFictionsByName)
+   .get('countAllMyGames/:id', Fiction.countAllMyGames)   
+   .get('countAllFictionsOnBases', Fiction.countAllFictionsOnBases)
    .post('/CountTotalWordBuUser/:id', Fiction.CountTotalWordBuUser)
    .post('/GetAllCommentsByFiction/:id', Fiction.GetAllCommentsByFiction)   
    .get('/CountTotalWordBuUserV2/:id', Fiction.CountTotalWordBuUserV2)
    .get('/GetFiveLastChapByUser/:id', Fiction.GetFiveLastChapByUser)
+   .post('GetAllFictionsOnBase', Fiction.GetAllFictionsOnBase)
    .post('/chapitre/:id', Fiction.GetAChapterByName)
    .post('/createAChapitre/:id',  uploadFileMiddleware.single('image'),Fiction.CreateANewChapter)
    .post('/GetLastChapterOfAFiction/:id', Fiction.GetLastChapterOfAFiction)

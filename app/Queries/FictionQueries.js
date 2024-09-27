@@ -2,6 +2,79 @@ const { v4: uuidv4 } = require('uuid');
 const model = require('../Models');
 require('../Models/associations');
 
+const countAllMyFictions = (usr) => {
+  console.log("************ countAllMyFictions********* ", usr);
+  const promises = []
+  const request = model.Fiction.findAndCountAll({
+    include: [
+      {
+        model: model.Fiction,
+        where: {
+          UserId: { [model.Utils.Op.like]: `%${usr}%` },
+        },
+      },
+    ]
+  });
+  promises.push(request)
+  return request
+    .then(w => {
+      const nbResult = Object.keys(w.rows).length
+      return { count: nbResult }
+    })
+    .catch(err => {
+      console.log("ERROR: ", err)
+    })
+};
+
+
+
+const countAllFictionsOnBases = () => {
+  console.log("********** countAllFictionsOnBases **************");
+  const promises = []
+  const request = model.Fiction.findAndCountAll({});
+  promises.push(request)
+  return request
+    .then(w => {
+      const nbResult = Object.keys(w.rows).length
+      return { count: nbResult }
+    })
+    .catch(err => {
+      console.log("ERROR: ", err)
+    })
+};
+
+
+const GetAllFictionsOnBase = (nav) => {  
+  console.log("**** GetAllFictions ****",nav);
+  return model.Fiction.findAll({
+    offset: nav.step * nav.current,
+    limit: nav.step,
+    include: [
+      { model: model.Comments },
+      { model: model.User,
+        attributes: ['Id', 'UserName']
+      },
+      { model: model.FictionIllustration },
+      { model: model.Chapter },      
+      { model: model.Game,
+        include: [
+          { model: model.GameCharacter,
+            attributes: ['Id'],
+            include: [ { model: model.Character,
+                attributes: ['Id', 'CurrentName', 'Image'],
+                include: [ { model: model.Grade },
+                  {model: model.Warrior,
+                    include: [{ model: model.Clan }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+}
 const GetAllFictionsByName = (name, nav) => {
   console.log("**** GetTheFictionByName ****", name, nav);
   console.log(name, nav)
@@ -265,6 +338,9 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
 }
 
 const queries = {
+  countAllFictionsOnBases,
+  countAllMyFictions,
+  GetAllFictionsOnBase,
   CountTotalWordBuUser,
   CountTotalWordByUserV2,
   GetAllFictionsByName,

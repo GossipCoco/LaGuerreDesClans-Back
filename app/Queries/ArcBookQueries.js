@@ -5,6 +5,7 @@ require('../Models/associations');
 const GetAllArcsWithBooks = (nav) => {
     console.log("************ GetAllBooks ************", nav)
     return model.Arc.findAll({
+        order: [["ArcNumber", "ASC"]],
         include:[{
             model: model.Book
         }]

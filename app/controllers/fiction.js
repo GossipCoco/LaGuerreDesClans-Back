@@ -2,6 +2,44 @@ const queries = require("../Queries/FictionQueries");
 
 const Fiction = {}
 
+/** 
+ * COMPTAGE DE FICTIONS
+ */
+Fiction.countAllMyGames = (req, res) => {
+  queries.countAllMyGames(req.params.id)
+  .then((w) => {
+    res.send({ob: w.count, res: true }).status(200);
+  })
+  .catch((err) => {
+    console.log("countAllMyGames",err);
+    res.send(err).status(500);
+  });
+}
+Fiction.countAllFictionsOnBases = (req, res) => {
+  queries.countAllFictionsOnBases()
+  .then((w) => {
+    res.send({ob: w.count, res: true }).status(200);
+  })
+  .catch((err) => {
+    res.send(err).status(500);
+  });
+}
+
+/** 
+ * RECUREPER LES FICTIONS
+ */
+Fiction.GetAllFictionsOnBase = (req, res) => {
+  console.log("*********************" + req.body + "*********************")
+  queries.GetAllFictionsOnBase(req.body)
+  .then((w) => {
+    res.send({ ob: w, res: true }).status(200);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send(err).status(500);
+  });
+  
+}
 
 Fiction.GetAllFictionsByName = (req, res) => {
   queries.GetAllFictionsByName(req.params.id, req.body)
@@ -25,17 +63,6 @@ Fiction.GetAChapterByName = (req, res) => {
       res.send(err).status(500);
     });
 }
-Fiction.CreateANewChapter = (req, res) => {
-  console.log(req.file.filename)
-  queries.CreateANewChapter(req.params.id, req.body, req.file.filename)
-  .then((w) => {
-    res.send({ ob: w, res: true, message: "Chapter created successfully" }).status(200);
-  })
-  .catch((err) => {
-    console.log(err);
-    res.send(err).status(500);
-  });
-}
 
 Fiction.GetLastChapterOfAFiction = (req, res) => {
   console.log("GetLastChapterOfAFiction", req.params.id)
@@ -48,6 +75,34 @@ Fiction.GetLastChapterOfAFiction = (req, res) => {
     res.send(err).status(500);
   });
 }
+
+Fiction.GetFiveLastChapByUser = (req, res) => {
+  queries.GetFiveLastChapByUser(req.params.id)
+  .then((w) => {
+    // console.log("CountTotalWordByUserV2", w)
+    res.send({ ob: w, res: true, message: "CountTotalWordBuUserV2" }).status(200);
+  })
+  .catch((err) => {
+    console.log("CountTotalWordByUserV2", err);
+    res.send(err).status(500);
+  });
+}
+/** 
+ * cREATRION CHAPITRE
+ */
+
+Fiction.CreateANewChapter = (req, res) => {
+  console.log(req.file.filename)
+  queries.CreateANewChapter(req.params.id, req.body, req.file.filename)
+  .then((w) => {
+    res.send({ ob: w, res: true, message: "Chapter created successfully" }).status(200);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send(err).status(500);
+  });
+}
+
 Fiction.CountTotalWordBuUser = (req, res) => {
   // console.log(req.params.id)
   queries.CountTotalWordBuUser(req.params.id)
@@ -61,7 +116,6 @@ Fiction.CountTotalWordBuUser = (req, res) => {
   });
 }
 
-
 Fiction.CountTotalWordBuUserV2 = (req, res) => {
   // console.log(req.params.id)
   queries.CountTotalWordByUserV2(req.params.id)
@@ -74,17 +128,7 @@ Fiction.CountTotalWordBuUserV2 = (req, res) => {
     res.send(err).status(500);
   });
 }
-Fiction.GetFiveLastChapByUser = (req, res) => {
-  queries.GetFiveLastChapByUser(req.params.id)
-  .then((w) => {
-    // console.log("CountTotalWordByUserV2", w)
-    res.send({ ob: w, res: true, message: "CountTotalWordBuUserV2" }).status(200);
-  })
-  .catch((err) => {
-    console.log("CountTotalWordByUserV2", err);
-    res.send(err).status(500);
-  });
-}
+
 Fiction.AddRating = (req, res) => {
   const { Id, FictionId, Rating, UserId,  DateRated} = req.body;
 

@@ -54,6 +54,9 @@ const Arc = connection.define(
     IllustrationSix: {
       type: DataTypes.STRING(255),
       allowNull: true,
+    },
+    ArcNumber: {
+      type: DataTypes.INTEGER
     }
   },
   {

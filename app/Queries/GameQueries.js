@@ -41,12 +41,15 @@ const countAllGames = () => {
     })
 };
 
+
+
+
 const GetAllGames = (nav) => {
   console.log("**** All Games ****", nav, nav.step * nav.current, nav.step);
   return model.Game.findAll({
     offset: nav.step * nav.current,
     limit: nav.step,
-    order: [["DateCreation", "ASC"]],
+    // order: [["DateCreation", "ASC"]],
     where: {
       TypeGameId: 'Fiction',
     },
@@ -54,7 +57,7 @@ const GetAllGames = (nav) => {
       // { model: model.UserGame },
       {
         model: model.Fiction,
-        // order: [["Title", "ASC"]],
+        order: [["Title", "ASC"]],
         include: [{
           model: model.Chapter
         }],
