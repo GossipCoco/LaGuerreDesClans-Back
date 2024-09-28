@@ -7,19 +7,14 @@ const uploadFileMiddleware = require('../middleware/uploadImgFiction');  // Assu
 const router = express.Router();
 
 router
-   .get('/countAllMyFictions', Fiction.countAllMyFictions)
-   .get('/countAllFictionsOnBases', Fiction.countAllFictionsOnBases)
-   .post('/GetAllFictionsOnBase', Fiction.GetAllFictionsOnBase)
-   .get('/countAllMyFictions/:id', Fiction.countAllMyFictions)
-   .post('/CountTotalWordBuUser/:id', Fiction.CountTotalWordBuUser)
+   .get('/CountAllFictionsOnBases', Fiction.countAllFictionsOnBases)
+   .get('/CountAllMyFictions/:id', Fiction.countAllMyFictions)
    .get('/CountTotalWordBuUserV2/:id', Fiction.CountTotalWordBuUserV2)
+   .post('/GetAllFictionsByUserId/:id', Fiction.GetAllFictionsByUser)
+   .post('/GetAllFictionsOfALlUsers', Fiction.GetAllFictionsOnBase)
+   .post('/CountTotalWordBuUser/:id', Fiction.CountTotalWordBuUser)  
    .post('/GetAllCommentsByFiction/:id', Fiction.GetAllCommentsByFiction) 
-   .post('/getFictionByName/:id', Fiction.GetAllFictionsByName)
-   .get('/GetFiveLastChapByUser/:id', Fiction.GetFiveLastChapByUser)
-   .post('/chapitre/:id', Fiction.GetAChapterByName)
-   .post('/GetLastChapterOfAFiction/:id', Fiction.GetLastChapterOfAFiction)
-   .post('/createAChapitre/:id',  uploadFileMiddleware.single('image'),Fiction.CreateANewChapter)
-   .post('/AddRating/:id', Fiction.AddRating)
+   .post('/GetAllFictionsByName/:id', Fiction.GetAllFictionsByName)  
    .post('/CreateCommentForAFiction/:id', Fiction.CreateCommentForAFiction)
    
    

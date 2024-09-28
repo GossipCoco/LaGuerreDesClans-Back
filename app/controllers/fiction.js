@@ -22,7 +22,7 @@ Fiction.countAllFictionsOnBases = (req, res) => {
   });
 }
 Fiction.countAllMyFictions = (req, res) => {
-  queries.countAllMyFictions(req.paramas.id)
+  queries.countAllMyFictions(req.params.id)
   .then((w) => {
     res.send({ob: w.count, res: true }).status(200);
   })
@@ -156,6 +156,20 @@ Fiction.GetAllCommentsByFiction = (req, res) => {
   })
   .catch((err) => {
     console.log("GetAllCommentsByFiction", err);
+    res.send(err).status(500);
+  });
+
+}
+Fiction.GetAllFictionsByUser = (req, res) => {
+  console.log("*************** GetAllFictionsByUser ***************", req.params.id, req.body)
+  const nav = req.body
+  const id = req.params.id
+  queries.GetAllFictionsByUser(id, nav)
+  .then((w) => {
+    res.send({ ob: w, res: true, message: "GetAllFictionsByUser" }).status(200);
+  })
+  .catch((err) => {
+    console.log("GetAllFictionsOnBaseByUser", err);
     res.send(err).status(500);
   });
 

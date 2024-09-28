@@ -25,6 +25,8 @@ const Event = require('./app/routes/event')
 const Quest = require('./app/routes/quest')
 const imagegenRouter  = require('./app/routes/imagegen');
 const ArcBook = require('./app/routes/ArcBook')
+const Rating = require('./app/routes/Rating')
+const Chapter = require('./app/routes/Chapter')
 const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
@@ -70,6 +72,8 @@ app
   .use('/event', Event)
   .use('/user', User)
   .use('/ArcBook', ArcBook)
+  .use('/chapter', Chapter)
+  .use('/rating', Rating)
   .use(function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.status(404).send({ result: 'error' });

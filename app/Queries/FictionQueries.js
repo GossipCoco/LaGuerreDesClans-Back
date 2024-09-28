@@ -6,14 +6,7 @@ const countAllMyFictions = (usr) => {
   console.log("************ countAllMyFictions********* ", usr);
   const promises = []
   const request = model.Fiction.findAndCountAll({
-    include: [
-      {
-        model: model.Fiction,
-        where: {
-          UserId: { [model.Utils.Op.like]: `%${usr}%` },
-        },
-      },
-    ]
+    where: { UserId:usr },
   });
   promises.push(request)
   return request
@@ -42,7 +35,40 @@ const countAllFictionsOnBases = () => {
 
 const GetAllFictionsOnBase = (nav) => {  
   console.log("**** GetAllFictions ****",nav);
+  return model.Fiction.findAll({    
+    order: [["Title", "ASC"]],
+    offset: nav.step * nav.current,
+    limit: nav.step,
+    include: [
+      { model: model.Comments },
+      { model: model.User,
+        attributes: ['Id', 'UserName']
+      },
+      { model: model.FictionIllustration },
+      { model: model.Chapter },      
+      { model: model.Game,
+        include: [
+          { model: model.GameCharacter,
+            attributes: ['Id'],
+            include: [ { model: model.Character,
+                attributes: ['Id', 'CurrentName', 'Image'],
+                include: [ { model: model.Grade },
+                  {model: model.Warrior,
+                    include: [{ model: model.Clan }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+}
+const GetAllFictionsByUser = (usr, nav) => {  
+  console.log("********  GetAllFictionsByUser ********", usr, nav);
   return model.Fiction.findAll({
+    where: { UserId:usr },
     order: [["Title", "ASC"]],
     offset: nav.step * nav.current,
     limit: nav.step,
@@ -348,7 +374,8 @@ const queries = {
   CreateANewChapter,
   AddRating,
   CreateCommentForAFiction,
-  GetAllCommentsByFiction
+  GetAllCommentsByFiction,
+  GetAllFictionsByUser
 };
 
 module.exports = queries;

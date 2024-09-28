@@ -3,7 +3,7 @@ const model = require('../Models');
 require('../Models/associations');
 
 const countAllMyGames = (usr) => {
-  console.log("countAllMyFictions", usr);
+  console.log("countAllMyGames", usr);
   const promises = []
   const request = model.Game.findAndCountAll({
     include: [
