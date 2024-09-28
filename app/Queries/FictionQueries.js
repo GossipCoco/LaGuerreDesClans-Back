@@ -25,9 +25,6 @@ const countAllMyFictions = (usr) => {
       console.log("ERROR: ", err)
     })
 };
-
-
-
 const countAllFictionsOnBases = () => {
   console.log("********** countAllFictionsOnBases **************");
   const promises = []
@@ -43,10 +40,10 @@ const countAllFictionsOnBases = () => {
     })
 };
 
-
 const GetAllFictionsOnBase = (nav) => {  
   console.log("**** GetAllFictions ****",nav);
   return model.Fiction.findAll({
+    order: [["Title", "ASC"]],
     offset: nav.step * nav.current,
     limit: nav.step,
     include: [
@@ -79,6 +76,7 @@ const GetAllFictionsByName = (name, nav) => {
   console.log("**** GetTheFictionByName ****", name, nav);
   console.log(name, nav)
   return model.Fiction.findOne({
+    order: [["Title", "ASC"]],
     where: {
       Title: { [model.Utils.Op.like]: `%${name}%` },
     },
