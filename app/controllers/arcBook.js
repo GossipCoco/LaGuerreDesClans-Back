@@ -1,38 +1,16 @@
 const query = require('../Queries/ArcBookQueries')
+const { handleResponse } = require("./function");  // Importer la fonction
 const ArcBook = {}
 
 ArcBook.GetAllArcsWithBooks = (req, res) => {
-    query.GetAllArcsWithBooks(req.body)
-    .then(w => {
-        // const nbResult = Object.keys(w).length
-        // console.log("w", w)
-        res.send({ ob: w, res: true }).status(200)
-    })
-    .catch(err => {
-        console.log(err)
-        res.send(err).status(500)
-    })
+    handleResponse(res, query.GetAllArcsWithBooks(req.body))    
 }
-
 ArcBook.GetAllBooks = (req, res) => {
-    // console.log(req.body)
-    query.GetAllBooks(req.body)
-    .then(w => {
-        // const nbResult = Object.keys(w).length
-        // console.log("w", w)
-        res.send({ ob: w, res: true }).status(200)
-    })
-    .catch(err => {
-        console.log(err)
-        res.send(err).status(500)
-    })
+    handleResponse(res, query.GetAllBooks(req.body)) 
 }
-
-ArcBook.GetBookByTitle = (req, res) => {
+ArcBook.GetBookByTitle = (req, res) => { 
     query.GetBookByTitle(req.params.id)
     .then(w => {
-        // const nbResult = Object.keys(w).length
-        // console.log("w", w)
         res.send({ ob: w, res: true }).status(200)
     })
     .catch(err => {
