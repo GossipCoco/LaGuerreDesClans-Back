@@ -2,54 +2,21 @@ const query = require('../Queries/CharacterQueries')
 const { handleResponse } = require("./function");  // Importer la fonction
 const Character = {}
 Character.countAllCharacters = (req, res) => {
-    query.countAllCharacters()
-        .then(w => {
-            res.send({ ob: w, res: true }).status(200)
-        })
-        .catch(err => {
-            console.log(err)
-            res.send(err).status(500)
-        })
+    handleResponse(res, query.countAllCharacters())
 }
 Character.GetAllCharacters = (req, res) => {
-    query.GetAllCharacters(req.body.nav)
-        .then(w => {
-            res.send({ ob: w, res: true }).status(200)
-        })
-        .catch(err => {
-            console.log(err)
-            res.send(err).status(500)
-        })
+    handleResponse(res, query.GetAllCharacters(req.body.nav))    
 }
 Character.GetAllCharactersDashboard = (req, res) => {
-    query.GetAllCharactersDashboard(req.body.nav)
-        .then(w => {
-            res.send({ ob: w, res: true }).status(200)
-        })
-        .catch(err => {
-            //console.log(err)
-            res.send(err).status(500)
-        })
+    handleResponse(res, query.GetAllCharactersDashboard(req.body.nav))
 }
 Character.GetCharacterByName = (req, res) => {
     const id = req.params.id
-    query.GetCharacterByName(id)
-        .then(w => {
-            res.send({ ob: w, res: true }).status(200)
-        })
-        .catch(err => {
-            res.send(err).status(500)
-        })
+    handleResponse(res, query.GetCharacterByName(id))
 }
 Character.GetCharacterByNameSearch = (req, res) => {
     const id = req.params.name
-    query.GetCharacterByNameSearch(id)
-        .then(w => {
-            res.send({ ob: w, res: true }).status(200)
-        })
-        .catch(err => {
-            res.send(err).status(500)
-        })
+    handleResponse(res, query.GetCharacterByNameSearch(id))    
 }
 
 Character.CreateANewCharacter = (req, res) => {

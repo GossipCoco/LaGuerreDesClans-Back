@@ -3,19 +3,12 @@ const { handleResponse } = require("./function");  // Importer la fonction
 const ArcBook = {}
 
 ArcBook.GetAllArcsWithBooks = (req, res) => {
-    handleResponse(res, query.GetAllArcsWithBooks(req.body))    
+    handleResponse(res, query.GetAllArcsWithBooks(req.body))
 }
 ArcBook.GetAllBooks = (req, res) => {
-    handleResponse(res, query.GetAllBooks(req.body)) 
+    handleResponse(res, query.GetAllBooks(req.body))
 }
-ArcBook.GetBookByTitle = (req, res) => { 
-    query.GetBookByTitle(req.params.id)
-    .then(w => {
-        res.send({ ob: w, res: true }).status(200)
-    })
-    .catch(err => {
-        console.log(err)
-        res.send(err).status(500)
-    })
+ArcBook.GetBookByTitle = (req, res) => {
+    handleResponse(res, query.GetBookByTitle(req.params.id))
 }
 module.exports = ArcBook
