@@ -145,120 +145,212 @@ const GetFiveLastGameByUser = (usr) => {
   })
 }
 
-/**
- * 
- * @param {String} UserId 
- * @param {Object} data 
- * @param {String} imagePath 
- * @returns {Object}
- */
-const CreateANewGame = (UserId, data, imagePath) => {
+// /**
+//  * 
+//  * @param {String} UserId 
+//  * @param {Object} data 
+//  * @param {String} imagePath 
+//  * @returns {Object}
+//  */
+// const CreateANewGame = (UserId, data, imagePath) => {
+//   console.log("**** CreateANewGame ****", UserId, data, imagePath);
+//   const date = new Date().toISOString();
+//   const promises = [];
+//   const gameId = uuidv4();
+//   const FictionId = uuidv4()
+//   const NewImagePath = '/images/Fictions/'+imagePath
+//   const requestNewGame = {
+//     Id: gameId,
+//     DateCreation: date,
+//     TypeGameId: 'Fiction'
+//   };
+//   const firstRequest = model.Game.create(requestNewGame);
+//   promises.push(firstRequest);
+//   return firstRequest  
+//     .then(() => {      
+//       const requestNewFiction = {
+//         Id: FictionId, // Nouvelle clé primaire pour Fiction
+//         Title: data.Title,
+//         Summary: data.Summary,
+//         Image: NewImagePath,  // Use the filename from multer
+//         GameId: gameId,
+//         DateCreation: date,
+//         UserId: UserId
+//       };   
+//       const secondRequest = model.Fiction.create(requestNewFiction);  
+//       promises.push(secondRequest);
+//       return secondRequest
+//         .then(() => {
+//           const requestUserGame = {
+//             Id: uuidv4(), // Nouvelle clé primaire pour UsersGame
+//             GameId: gameId,
+//             UserId: UserId
+//           };
+//           const thirdRequest = model.UserGame.create(requestUserGame);
+//           promises.push(thirdRequest);
+//           return thirdRequest
+//             .then(() => {
+//               const requestIllustration = {
+//                 Id: NewImagePath,
+//                 DateCreation: date
+//               }
+//               const requestIllustrationCreate = model.Illustration.create(requestIllustration)
+//               promises.push(requestIllustrationCreate)
+//               return requestIllustrationCreate
+//               .then(() => {
+//                 const requestFictionIllustration = {
+//                   Id: uuidv4(),
+//                   FictionId: FictionId,
+//                   IllustrationId: NewImagePath
+//                 }
+//                 const requestIllFic = model.FictionIllustration.create(requestFictionIllustration)
+//                 promises.push(requestIllFic)
+//                 return requestIllFic
+//                 .then(() => {
+//                   const RequestCharacterFirst = {
+//                     Id: uuidv4(),
+//                     GameId: gameId,
+//                     CharacterId: data.FirstCharacterId
+//                   }
+//                   const requestGameCharacterFirst = model.GameCharacter.create(RequestCharacterFirst)
+//                   promises.push(requestGameCharacterFirst)
+//                   return requestGameCharacterFirst
+//                   .then(() => {
+//                     const RequestCharacterSecond = {
+//                       Id: uuidv4(),
+//                       GameId: gameId,
+//                       CharacterId: data.SecondCharacterId
+//                     }
+//                     const requestGameCharacterSecond = model.GameCharacter.create(RequestCharacterSecond)
+//                     promises.push(requestGameCharacterSecond)
+//                     return requestGameCharacterSecond
+//                     .then(() => {
+//                       Promise.all(promises)
+//                     })
+//                     .catch((err) => {
+//                       console.log(err);
+//                       return Promise.reject(err);
+//                     });
+                      
+//                   })
+//                   .catch((err) => {
+//                     console.log(err);
+//                     return Promise.reject(err);
+//                   });
+//                 })
+//                 .catch((err) => {
+//                   console.log(err);
+//                   return Promise.reject(err);
+//                 });
+//               })
+//               .catch((err) => {
+//                 console.log(err);
+//                 return Promise.reject(err);
+//               });
+//             })
+//             .catch((err) => {
+//               console.log(err);
+//               return Promise.reject(err);
+//             });
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//           return Promise.reject(err);
+//         });
+//     });
+   
+// }
+
+const CreateANewGame = async (UserId, data, imagePath) => {
   console.log("**** CreateANewGame ****", UserId, data, imagePath);
   const date = new Date().toISOString();
-  const promises = [];
   const gameId = uuidv4();
-  const FictionId = uuidv4() 
-  const requestNewGame = {
-    Id: gameId,
-    DateCreation: date,
-    TypeGameId: 'Fiction'
-  };
-  const firstRequest = model.Game.create(requestNewGame);
-  promises.push(firstRequest);
-  return firstRequest  
-    .then(() => {      
-      const requestNewFiction = {
-        Id: FictionId, // Nouvelle clé primaire pour Fiction
-        Title: data.Title,
-        Summary: data.Summary,
-        Image: '/images/Fictions/'+imagePath,  // Use the filename from multer
-        GameId: gameId,
-        DateCreation: date,
-        UserId: UserId
-      };   
-      const secondRequest = model.Fiction.create(requestNewFiction);  
-      promises.push(secondRequest);
-      return secondRequest
-        .then(() => {
-          const requestUserGame = {
-            Id: uuidv4(), // Nouvelle clé primaire pour UsersGame
-            GameId: gameId,
-            UserId: UserId
-          };
-          const thirdRequest = model.UserGame.create(requestUserGame);
-          promises.push(thirdRequest);
-          return thirdRequest
-            .then(() => {
-              const requestIllustration = {
-                Id: '/images/Fictions/'+imagePath,
-                DateCreation: date
-              }
-              const requestIllustrationCreate = model.Illustration.create(requestIllustration)
-              promises.push(requestIllustrationCreate)
-              return requestIllustrationCreate
-              .then(() => {
-                const requestFictionIllustration = {
-                  Id: uuidv4(),
-                  FictionId: FictionId,
-                  IllustrationId: '/images/Fictions/'+imagePath
-                }
-                const requestIllFic = model.FictionIllustration.create(requestFictionIllustration)
-                promises.push(requestIllFic)
-                return requestIllFic
-                .then(() => {
-                  const RequestCharacterFirst = {
-                    Id: uuidv4(),
-                    GameId: gameId,
-                    CharacterId: data.FirstCharacterId
-                  }
-                  const requestGameCharacterFirst = model.GameCharacter.create(RequestCharacterFirst)
-                  promises.push(requestGameCharacterFirst)
-                  return requestGameCharacterFirst
-                  .then(() => {
-                    const RequestCharacterSecond = {
-                      Id: uuidv4(),
-                      GameId: gameId,
-                      CharacterId: data.SecondCharacterId
-                    }
-                    const requestGameCharacterSecond = model.GameCharacter.create(RequestCharacterSecond)
-                    promises.push(requestGameCharacterSecond)
-                    return requestGameCharacterSecond
-                    .then(() => {
-                      Promise.all(promises)
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                      return Promise.reject(err);
-                    });
-                      
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    return Promise.reject(err);
-                  });
-                })
-                .catch((err) => {
-                  console.log(err);
-                  return Promise.reject(err);
-                });
-              })
-              .catch((err) => {
-                console.log(err);
-                return Promise.reject(err);
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-              return Promise.reject(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-          return Promise.reject(err);
-        });
+  const FictionId = uuidv4();
+  const NewImagePath = '/images/Fictions/' + imagePath;
+
+  try {
+    // Crée un nouveau jeu
+    const requestNewGame = {
+      Id: gameId,
+      DateCreation: date,
+      TypeGameId: 'Fiction'
+    };
+    await model.Game.create(requestNewGame);
+
+    // Crée une nouvelle fiction
+    const requestNewFiction = {
+      Id: FictionId,
+      Title: data.Title,
+      Summary: data.Summary,
+      Image: NewImagePath,
+      GameId: gameId,
+      DateCreation: date,
+      UserId: UserId
+    };
+    await model.Fiction.create(requestNewFiction);
+
+    // Associe le jeu à l'utilisateur
+    const requestUserGame = {
+      Id: uuidv4(),
+      GameId: gameId,
+      UserId: UserId
+    };
+    await model.UserGame.create(requestUserGame);
+
+    // Vérifie si l'illustration existe déjà
+    const existingIllustration = await model.Illustration.findOne({
+      where: { Id: NewImagePath }
     });
-   
-}
+
+    let illustrationId;
+
+    if (!existingIllustration) {
+      // Crée une nouvelle illustration seulement si elle n'existe pas déjà
+      const requestIllustration = {
+        Id: NewImagePath,  // Utilise le chemin de l'image comme clé primaire
+        DateCreation: date
+      };
+      const newIllustration = await model.Illustration.create(requestIllustration);
+      illustrationId = newIllustration.Id;
+    } else {
+      // Si l'illustration existe déjà, récupère son ID
+      illustrationId = existingIllustration.Id;
+    }
+
+    // Lier la fiction à l'illustration
+    const requestFictionIllustration = {
+      Id: uuidv4(),
+      FictionId: FictionId,
+      IllustrationId: illustrationId  // Utilise l'ID de l'illustration
+    };
+    await model.FictionIllustration.create(requestFictionIllustration);
+
+    // Associe le premier personnage au jeu
+    const RequestCharacterFirst = {
+      Id: uuidv4(),
+      GameId: gameId,
+      CharacterId: data.FirstCharacterId
+    };
+    await model.GameCharacter.create(RequestCharacterFirst);
+
+    // Associe le second personnage au jeu
+    const RequestCharacterSecond = {
+      Id: uuidv4(),
+      GameId: gameId,
+      CharacterId: data.SecondCharacterId
+    };
+    await model.GameCharacter.create(RequestCharacterSecond);
+
+    // Une fois toutes les opérations terminées, redirige l'utilisateur
+    console.log('Redirection après création de la fiction');
+    return { success: true }; // Tu peux ici déclencher une redirection dans ton frontend
+  } catch (err) {
+    console.error(err);
+    return Promise.reject(err);
+  }
+};
+
+
 const AddANewCharacterToGameAndFiction = (Id, data) => {
   console.log("**** AddANewCharacterToGameAndFiction ****", Id, data);
   const promises = []

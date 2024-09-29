@@ -25,14 +25,15 @@ Game.CreateANewGame = (req, res) => {
     return res.status(400).send({ message: "All fields are required" });
   }
   const data = { Title, Summary, FirstCharacterId, SecondCharacterId, LocationId };
-  queries.CreateANewGame(UserId, data, imagePath)
-    .then((w) => {
-      res.status(200).send({ message: "Game created successfully", data: w });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
-    });    
+  handleResponse(res, query.CreateANewGame(UserId, data, imagePath))
+  // queries.CreateANewGame(UserId, data, imagePath)
+  //   .then((w) => {
+  //     res.status(200).send({ message: "Game created successfully", data: w });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.status(500).send(err);
+  //   });    
 }
 Game.GetFiveLastGameByUser = (req, res) => {  
   handleResponse(res, query.GetFiveLastGameByUser(req.params.id))
