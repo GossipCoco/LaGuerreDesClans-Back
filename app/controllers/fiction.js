@@ -2,8 +2,6 @@ const queries = require("../Queries/FictionQueries");
 const { handleResponse } = require("./function");  // Importer la fonction
 const Fiction = {}
 
-
-
 // Utilisation d'une fonction utilitaire pour gérer les requêtes
 Fiction.countAllMyFictions = async (req, res) => {
   handleResponse(res, queries.countAllMyFictions(req.params.id));

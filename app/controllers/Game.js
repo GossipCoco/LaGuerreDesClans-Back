@@ -1,49 +1,18 @@
 const model = require('../Models/GameModel');
-const queries = require("../Queries/GameQueries");
-
-
+const query = require("../Queries/GameQueries");
+const { handleResponse } = require("./function");  // Importer la fonction
 const Game = {}
-
 Game.GetAllGames = (req, res) => {
-    queries.GetAllGames(req.body)
-    .then((w) => {
-        res.send({ ob: w, res: true }).status(200);
-      })
-      .catch((err) => {
-        console.log("GetAllGames", err);
-        res.send(err).status(500);
-      });
+  handleResponse(res, query.GetAllGames(req.body))    
 }
 Game.GetAllGamesByUser = (req, res) => {
-  console.log("req.body", req.body)
-  queries.GetAllGamesByUser(req.params.id,  req.body)
-  .then((w) => {
-    res.send({ ob: w, res: true }).status(200);
-  })
-  .catch((err) => {
-    console.log("GetAllGamesByUser ",err);
-    res.send(err).status(500);
-  });
-  
+  handleResponse(res, query.GetAllGamesByUser(req.params.id,  req.body))
 }
 Game.countAllMyGames = (req, res) => {
-  queries.countAllMyGames(req.params.id)
-  .then((w) => {
-    res.send({ob: w.count, res: true }).status(200);
-  })
-  .catch((err) => {
-    console.log("countAllMyGames",err);
-    res.send(err).status(500);
-  });
+  handleResponse(res, query.countAllMyGames(req.params.id)) 
 }
 Game.countAllGames = (req, res) => {
-  queries.countAllGames()
-  .then((w) => {
-    res.send({ob: w.count, res: true }).status(200);
-  })
-  .catch((err) => {
-    res.send(err).status(500);
-  });
+  handleResponse(res, query.countAllGames())
 }
 Game.CreateANewGame = (req, res) => {
   console.log("CreateANewGame", req.file)
@@ -65,47 +34,18 @@ Game.CreateANewGame = (req, res) => {
       res.status(500).send(err);
     });    
 }
-Game.GetFiveLastGameByUser = (req, res) => {
-  queries.GetFiveLastGameByUser(req.params.id)
-  .then((w) => {
-        res.status(200).send({ message: "Game created successfully", data: w });
-  })
-  .catch((err) => {
-    console.log("GetFiveLastGameByUser", err);
-    res.status(500).send(err);
-  });
+Game.GetFiveLastGameByUser = (req, res) => {  
+  handleResponse(res, query.GetFiveLastGameByUser(req.params.id))
 }
 Game.GetAllLastFiveGames = (req, res) => {
-  queries.GetAllLastFiveGames(req.body)
-  .then((w) => {
-    // console.log(result)
-    res.status(200).send({ message: "Game created successfully", data: w });
-  })
-  .catch((err) => {   
-    res.status(500).send(err);
-  });
+  handleResponse(res, query.GetAllLastFiveGames(req.body))
 }
 Game.GetAllGamesByCharacter = (req, res) => {
   const id = req.params.id
   const data = req.body
-  queries.GetAllGamesByCharacter(id, data)
-  .then((w) => {
-    // console.log(result)
-    res.status(200).send({ message: "Game created successfully", data: w });
-  })
-  .catch((err) => {   
-    res.status(500).send(err);
-  });
+  handleResponse(res, query.GetAllGamesByCharacter(id, data))  
 }
 Game.AddANewCharacterToGameAndFiction = (req, res) => {
-  queries.AddANewCharacterToGameAndFiction(req.params.id, req.body)
-  .then((w) => {
-    // console.log(result)
-    res.status(200).send({ message: "AddANewCharacterToGameAndFiction", data: w });
-  })
-  .catch((err) => {
-    console.log( "AddANewCharacterToGameAndFiction",err);
-    res.status(500).send(err);
-  });
+  handleResponse(res, query.AddANewCharacterToGameAndFiction(req.params.id, req.body))  
 }
 module.exports = Game
