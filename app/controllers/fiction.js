@@ -44,13 +44,13 @@ Fiction.CreateANewChapter = async (req, res) => {
 };
 
 Fiction.AddRating = async (req, res) => {
-  const { Id, FictionId, Rating, UserId, DateRated } = req.body;
-  handleResponse(res, queries.AddRating(req.params.id, { Id, FictionId, UserId, Rating, DateRated }));
+
+  handleResponse(res, queries.AddRating(req.params.id, req.body));
 };
 
 Fiction.CreateCommentForAFiction = async (req, res) => {
-  const { Id, Content, UserId, FictionId } = req.body;
-  handleResponse(res, queries.CreateCommentForAFiction(req.params.id, { Id, Content, UserId, FictionId }));
+  const { Content, UserId, FictionId } = req.body;
+  handleResponse(res, queries.CreateCommentForAFiction(req.params.id, { Content, UserId, FictionId }));
 };
 
 Fiction.GetAllCommentsByFiction = async (req, res) => {

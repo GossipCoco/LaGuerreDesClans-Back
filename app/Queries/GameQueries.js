@@ -89,13 +89,15 @@ const GetAllLastFiveGames = (nav) => {
   return model.Game.findAll({
     offset: nav.step,
     limit: nav.step,
-    attributes: ['Id'],
+    attributes: ['Id', 'DateCreation'],
+    where:{TypeGameId : 'Fiction'},
+    order: [["DateCreation", "ASC"]],
     include: [
       { model: model.UserGame },
       {
         model: model.Fiction,
-        attributes: ['Id', 'Title', 'Summary', 'Image', 'DateCreation'],
-        order: [["DateCreation", "DESC"]],
+        attributes: ['Id', 'Title', 'Summary', 'Image', 'DateCreation']
+        
       }]
   })
 };

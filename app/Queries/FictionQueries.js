@@ -165,7 +165,7 @@ const GetAChapterByName = (name, nav) => {
       },
       {
         model: model.Fiction,
-        attributes: ['UserId', 'Title'],
+        attributes: ['Id','UserId', 'Title'],
         include: [
           // { model: model.Comment},
           { model: model.FictionIllustration },
@@ -257,8 +257,7 @@ const GetAllCommentsByFiction = (id, nav) => {
         attributes:['Id', 'avatar', 'LastName', 'FirstName']
       },
       {
-      model: model.Fiction,
-      
+      model: model.Fiction,      
       where: 
       { Title: id }
     }],
@@ -310,8 +309,8 @@ const CreateCommentForAFiction = (id, data) => {
     DateCreation: new Date().toISOString(),
     UserId: data.UserId,
     FictionId: data.FictionId,
-    ChapterId: NULL
   })
+  console.log(comment)
   promises.push(comment)
   return comment
     .then((w) =>{
