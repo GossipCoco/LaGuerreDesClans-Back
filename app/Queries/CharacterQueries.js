@@ -48,6 +48,10 @@ const countAllCharacters = () => {
     console.log("GetAllCharactersDashboard", nav.step)
     return model.Character.findAll({
       attributes: ['Id', 'CurrentName', 'Image'],
+      include: [{
+        model: model.Clan,
+        attributes:['Name', 'Image']
+      }]
     })
       .then(w => {
         return Promise.all(w);

@@ -79,7 +79,9 @@ const GetUserById = (id) => {
     return model.User.findOne({
         where: { Id: id },
         include: [
-            { model: model.Gamer}, 
+            { model: model.Gamer, 
+                limit: 1,
+            }, 
             { model: model.Message,  where : { Status: 'unread'} },
             { model: model.Points },
             { model: model.Notification },
