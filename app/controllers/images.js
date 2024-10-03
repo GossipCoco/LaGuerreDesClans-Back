@@ -1,5 +1,5 @@
-const queries = require("../Queries/ImageQueries");
-
+const query = require("../Queries/ImageQueries");
+const { handleResponse } = require("./function");  // Importer la fonction
 const uploadFile = require("../middleware/upload");
 const uploadFileAvatar = require("../middleware/uploadAvatar");
 const fs = require("fs");
@@ -9,7 +9,7 @@ const Image = {};
 Image.GetAll = (req, res) => {
   const modelName = req.params.model;  // Le nom du modèle est passé en tant que paramètre de la requête
   console.log("Image.GetAll : ", modelName)
-  queries
+  query
     .getAll(modelName)
     .then((results) => {
       res.send({ ob: results, res: true }).status(200);
@@ -28,7 +28,7 @@ Image.Upload = async (req, res) => {
     if (req.file == undefined) {
       return res.status(400).send({ message: "Please upload a file!" });
     }
-    queries
+    query
       .UploadUserBackground(req.file.originalname, id)
       .then((w) => {
         res.status(200).send({
@@ -60,7 +60,7 @@ Image.UploadAvatar = async (req, res) => {
     if (req.file == undefined) {
       return res.status(400).send({ message: "Please upload a file!" });
     }
-    queries
+    query
       .UploadUserAvatar(req.file.originalname, id)
       .then((w) => {
         res.status(200).send({
@@ -85,7 +85,7 @@ Image.UploadAvatar = async (req, res) => {
 };
 
 Image.GetAllIllustrations = (req, res) => {
-  queries.GetAllIllustrations()
+  query.GetAllIllustrations()
   .then((w) => {
     res.send({ ob: w, res: true }).status(200);
   })

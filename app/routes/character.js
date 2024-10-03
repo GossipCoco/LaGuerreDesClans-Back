@@ -13,6 +13,7 @@ router
 .get('/GetAllNamesOfAllCharacters', Character.GetAllNamesOfAllCharacters)
 .get('/GetAllCharactersByUser/:id', Character.GetAllCharactersByUser)
 .get('/search/:name', Character.GetCharacterByNameSearch)
+.get('/GetOriginaleCharacterByUser/:id', Character.GetOriginaleCharacterByUser)
 .post('/allcharacters', Character.GetAllCharacters)
 .post('/GetAllCharactersDashboard', Character.GetAllCharactersDashboard)
 .post('/createANewCharacter', uploadFileMiddleware.single('image'), Character.CreateANewCharacter)

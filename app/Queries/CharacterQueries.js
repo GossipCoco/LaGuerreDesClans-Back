@@ -19,6 +19,7 @@ const countAllCharacters = () => {
       console.log("ERROR: ", err)
     })
   };
+
   const GetAllCharacters = (nav) => {
     console.log("************ GetAllCharacters ************", nav)
     return model.Character.findAll({
@@ -44,6 +45,7 @@ const countAllCharacters = () => {
       ],
     });
   };
+  
   const GetAllCharactersDashboard = (nav) => {
     console.log("GetAllCharactersDashboard", nav.step)
     return model.Character.findAll({
@@ -186,6 +188,13 @@ const GetAllNamesOfAllCharacters = async () => {
 
   return combinedNames;
 }
+
+const GetOriginaleCharacterByUser = (usr) => {  
+  console.log("GetOriginaleCharacterByUser", usr);
+  return model.Gamer.findAll({
+    where: { UserId: usr },
+  })
+}
 const CreateANewCharacter = (data) => {
   console.log("CreateANewCharacter", data);
   const promises = [];
@@ -244,5 +253,6 @@ const CreateANewCharacter = (data) => {
     GetCharacterByNameSearch,
     GetAllCharactersByNameGradeAndClan,
     GetAllNamesOfAllCharacters,
+    GetOriginaleCharacterByUser,
     CreateANewCharacter
   }
