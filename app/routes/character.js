@@ -8,6 +8,7 @@ const uploadFileMiddleware = require('../middleware/uploadCharacterImage')
 
 router
 .get('/GetCharacterByName/:id', Character.GetCharacterByName)
+.get('/GetOneOriginaleCharacterByName/:id', Character.GetOneOriginaleCharacterByName)
 .get('/countAllcharacters', Character.countAllCharacters)
 .get('/CountNbOriginaleCharacterByUser/:id', Character.CountNbOriginaleCharacterByUser)
 .get('/GetAllNamesAndIdsCharacters', Character.GetAllNamesAndIdsCharacters)

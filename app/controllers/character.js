@@ -43,4 +43,7 @@ Character.GetAllCharactersByUser = (req, res) => {
 Character.GetAllNamesOfAllCharacters = (req, res) => {
     handleResponse(res, query.GetAllNamesOfAllCharacters())
 }
+Character.GetOneOriginaleCharacterByName = (req, res) => {
+    handleResponse(res, query.GetOneOriginaleCharacterByName(req.params.id))
+}
 module.exports = Character

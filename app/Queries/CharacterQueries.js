@@ -216,7 +216,13 @@ const GetOriginaleCharacterByUser = (usr, nav) => {
     order: [["UserName", "ASC"]],
   })
 }
-
+const GetOneOriginaleCharacterByName = (Name) => {  
+  console.log("GetOneOriginaleCharacterByUser", Name);
+  return model.Gamer.findOne({
+    where: { Username: Name }, 
+    order: [["UserName", "ASC"]],
+  })
+}
 const CreateANewCharacter = (data) => {
   console.log("CreateANewCharacter", data);
   const promises = [];
@@ -277,5 +283,6 @@ const CreateANewCharacter = (data) => {
     GetAllCharactersByNameGradeAndClan,
     GetAllNamesOfAllCharacters,
     GetOriginaleCharacterByUser,
+    GetOneOriginaleCharacterByName,
     CreateANewCharacter
   }

@@ -41,6 +41,9 @@ const Gamer = connection.define(
         Biography: {
             type: DataTypes.TEXT
         },
+        Personnality: {
+            type: DataTypes.TEXT
+        },
         ClanId: {
             type: DataTypes.STRING(255),
             allowNull: false,
