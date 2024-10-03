@@ -188,13 +188,35 @@ const GetAllNamesOfAllCharacters = async () => {
 
   return combinedNames;
 }
-
-const GetOriginaleCharacterByUser = (usr) => {  
-  console.log("GetOriginaleCharacterByUser", usr);
-  return model.Gamer.findAll({
+const CountNbOriginaleCharacterByUser = (usr) => {  
+  console.log("**** countAllCharacters   *****************");
+  const request = model.Gamer.findAndCountAll({
     where: { UserId: usr },
+    attributes: ['Id']
+  });
+  const promises = []
+  promises.push(request)
+  return request
+  .then(w => {
+    const nbResult = Object.keys(w.rows).length
+    console.log("nbResult", nbResult)
+    return { count: nbResult }
+  })
+  .catch(err => {
+    console.log("ERROR: ", err)
+  })
+
+}
+const GetOriginaleCharacterByUser = (usr, nav) => {  
+  console.log("GetOriginaleCharacterByUser", usr, nav);
+  return model.Gamer.findAll({
+    where: { UserId: usr }, 
+    offset: nav.step * nav.current,
+    limit: nav.step,
+    order: [["UserName", "ASC"]],
   })
 }
+
 const CreateANewCharacter = (data) => {
   console.log("CreateANewCharacter", data);
   const promises = [];
@@ -245,6 +267,7 @@ const CreateANewCharacter = (data) => {
 };
   module.exports = {
     countAllCharacters,
+    CountNbOriginaleCharacterByUser,
     GetAllCharacters,
     GetAllCharactersDashboard,
     GetAllNamesAndIdsCharacters,
