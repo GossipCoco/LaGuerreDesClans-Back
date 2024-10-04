@@ -8,17 +8,11 @@ const Image = {};
 
 Image.GetAll = (req, res) => {
   const modelName = req.params.model;  // Le nom du modèle est passé en tant que paramètre de la requête
-  console.log("Image.GetAll : ", modelName)
-  query
-    .getAll(modelName)
-    .then((results) => {
-      res.send({ ob: results, res: true }).status(200);
-    })
-    .catch((err) => {
-      console.log("getAll : ", err);
-      res.status(500).send(err);
-    });
+  handleResponse(res, query.getAll(modelName))
 };
+Image.GetAllIllustrations = (req, res) => {
+  handleResponse(res, query.GetAllIllustrations())
+}
 Image.Upload = async (req, res) => {
   const id = req.params.id;
   console.log("id: ", id);
@@ -83,15 +77,4 @@ Image.UploadAvatar = async (req, res) => {
     });
   }
 };
-
-Image.GetAllIllustrations = (req, res) => {
-  query.GetAllIllustrations()
-  .then((w) => {
-    res.send({ ob: w, res: true }).status(200);
-  })
-  .catch((err) => {
-    console.log(err);
-    res.send(err).status(500);
-  });
-}
 module.exports = Image;

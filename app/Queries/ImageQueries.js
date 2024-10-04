@@ -33,13 +33,6 @@ const GetAllImagesTable = () => {
         console.log("ERROR: ", err);
       });
   };
-  // const GetAllImages = () => {
-  //   return model.Image.findAll({});
-  // };
-  // const GetAllIllustrations = () => {
-  //   return model.Illustration.findAll({})
-  // }
-
   const getAll = (modelName) => {
     console.log("********** getAll **********  : ", model[modelName])
     const newModel = model[modelName];

@@ -27,7 +27,7 @@ const createUploadMiddleware = (uploadDir) => {
     storage: storage,
     fileFilter: fileFilter,
     limits: { fileSize: maxSize },
-  });
+  })
 };
 
 module.exports = createUploadMiddleware;
