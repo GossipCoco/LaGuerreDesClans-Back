@@ -271,6 +271,41 @@ const CreateANewCharacter = (data) => {
       res.send(err).status(500);
     });
 };
+const CreateAnOriginalCharacter = (usr, data, imagePath) => {
+  console.log("CreateAnOriginalCharacter", usr, data);
+  let UserName = data.UserName;
+  var str = Name.replace(/\s+/g, '');
+  const date = new Date().toISOString()
+  const promises = []
+  const Id =  uuidv4()
+  const Image = '/images/Gamer/'+imagePath
+  const newOriginaleCharacter = {
+    Id: Id,
+    createdAt: date,
+    updatedAt: date,
+    UserId: usr,
+    UserName: UserName,
+    Image:Image,
+    Description: data.Description,
+    Biography: data.Description,
+    ClanId: data.ClanId,
+    Status: data.Status,
+    Genre: data.Genre,
+    GradeId: data.GradeId,
+    Personnality: data.Personnality
+  }
+  const firstRequest = model.Gamer.create(newOriginaleCharacter)
+  promises.push(firstRequest)
+  return firstRequest
+  .then((response) => {
+    return Promise.all(promises);
+  })
+    .catch((err) => {
+      console.log(err);
+      return Promise.reject(err);
+    })
+
+}
   module.exports = {
     countAllCharacters,
     CountNbOriginaleCharacterByUser,
@@ -284,5 +319,6 @@ const CreateANewCharacter = (data) => {
     GetAllNamesOfAllCharacters,
     GetOriginaleCharacterByUser,
     GetOneOriginaleCharacterByName,
-    CreateANewCharacter
+    CreateANewCharacter,
+    CreateAnOriginalCharacter
   }

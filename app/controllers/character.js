@@ -46,4 +46,13 @@ Character.GetAllNamesOfAllCharacters = (req, res) => {
 Character.GetOneOriginaleCharacterByName = (req, res) => {
     handleResponse(res, query.GetOneOriginaleCharacterByName(req.params.id))
 }
+Character.CreateAnOriginalCharacter = (req, res) => {
+    const usr = req.params.id
+    this.data = req.body
+    const imageFile = req.file;
+    if (imagePath) {
+        data.Image = imageFile.filename;
+    }
+    handleResponse(res, query.CreateAnOriginalCharacter(usr, data, imagePath))
+}
 module.exports = Character

@@ -1,4 +1,5 @@
 // Sequelize model for Message
+
 const { Model, DataTypes } = require('sequelize');
 const connection = require('../DataLayer/connectionWithSingleton'); // Assuming your Sequelize instance
 const functions = require ('./Function')

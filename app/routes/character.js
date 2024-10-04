@@ -1,11 +1,9 @@
 const express = require('express')
-
 const Character = require('../controllers/character')
-
-
 const router = express.Router()
-const uploadFileMiddleware = require('../middleware/uploadCharacterImage')
-
+ // Assume this is your multer config
+ const createUploadMiddleware = require('../middleware/UploadGeneric');
+ 
 router
 .get('/GetCharacterByName/:id', Character.GetCharacterByName)
 .get('/GetOneOriginaleCharacterByName/:id', Character.GetOneOriginaleCharacterByName)
@@ -18,6 +16,7 @@ router
 .post('/GetOriginaleCharacterByUser/:id', Character.GetOriginaleCharacterByUser)
 .post('/allcharacters', Character.GetAllCharacters)
 .post('/GetAllCharactersDashboard', Character.GetAllCharactersDashboard)
-.post('/createANewCharacter', uploadFileMiddleware.single('image'), Character.CreateANewCharacter)
+.post('/createANewCharacter', createUploadMiddleware('Characters/').single('image'), Character.CreateANewCharacter)
+.post('/CreateAnOriginalCharacter/:id', createUploadMiddleware('Gamer/').single('image'), Character.CreateAnOriginalCharacter)
 
 module.exports = router
