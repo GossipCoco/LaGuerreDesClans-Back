@@ -51,6 +51,8 @@ const {
   Book,
   Chronology,
   BookCharacter,
+  QuestionOptionModel,
+  QuestQuestionModel,
   sequelize: connection,
   Sequelize,
   Utils: {
@@ -252,6 +254,23 @@ Book.hasMany(BookCharacter)
 BookCharacter.belongsTo(Character, { foreignKey: 'CharacterId' })
 Character.hasMany(BookCharacter)
 
+// Quest model
+QuestQuestionModel.belongsTo(Quest, { foreignKey: 'QuestId' });
+Quest.hasMany(QuestQuestionModel);
+
+// QuestQuestion model
+QuestionOptionModel.belongsTo(QuestQuestionModel, { foreignKey: 'QuestQuestionId' });
+QuestQuestionModel.hasMany(QuestionOptionModel);
+
+
+// Correct Answer association
+// Correct Answer association
+QuestQuestionModel.belongsTo(QuestionOptionModel, { 
+  foreignKey: 'CorrectAnswerId', 
+  as: 'CorrectAnswer' 
+});
+
+
 module.exports = {
   User,
   Level,
@@ -302,6 +321,8 @@ module.exports = {
   Book,
   Chronology,
   BookCharacter,
+  QuestionOptionModel,
+  QuestQuestionModel,
   sequelize: connection,
   Sequelize,
   Utils: {

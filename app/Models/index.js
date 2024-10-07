@@ -53,6 +53,8 @@ const Arc = require('./ArcModel')
 const Book = require('./BookModel')
 const Chronology = require('./ChronologyModel')
 const BookCharacter = require('./BookCharacterModel')
+const QuestQuestionModel = require('./QuestQuestionModel')
+const QuestionOptionModel = require('./QuestionOptionModel')
 
 // Exporter les modèles
 const models = {
@@ -111,6 +113,8 @@ const models = {
   sequelize: connection,
   Sequelize,
   BookCharacter,
+  QuestionOptionModel,
+  QuestQuestionModel,
   Utils: {
     Op,
     sequelize,

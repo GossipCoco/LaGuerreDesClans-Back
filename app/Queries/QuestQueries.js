@@ -46,6 +46,13 @@ const GetQuestById = (id) => {
   return model.Quest.findOne({
     where: { Id: id},
     include: [
+      {
+        model: model.QuestQuestionModel,
+        include: [
+          { model: model.QuestionOptionModel },
+          { model: model.QuestionOptionModel, as: 'CorrectAnswer' } // Pour inclure la bonne réponse
+        ]
+      },
       { model: model.QuestParallax, 
         include: [{
           model: model.Parallax
