@@ -54,6 +54,7 @@ const {
   QuestionOptionModel,
   QuestQuestionModel,
   KeyObject,
+  QuestKeyObject,
   Sequelize,
   sequelize: connection,
   Utils: {
@@ -273,7 +274,11 @@ QuestQuestionModel.belongsTo(QuestionOptionModel, {
 
 //ASSOCIATION KEYMODEL
 
+QuestKeyObject.belongsTo(Quest, { foreignKey: 'QuestId'})
+Quest.hasMany(QuestKeyObject)
 
+QuestKeyObject.belongsTo(KeyObject, { foreignKey: 'KeyObjectId'})
+KeyObject.hasMany(QuestKeyObject)
 
 module.exports = {
   User,
@@ -328,6 +333,7 @@ module.exports = {
   QuestionOptionModel,
   QuestQuestionModel,
   KeyObject,
+  QuestKeyObject,
   Sequelize,
   sequelize: connection,
   Utils: {

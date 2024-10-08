@@ -46,6 +46,11 @@ const GetQuestById = (id) => {
   return model.Quest.findOne({
     where: { Id: id},
     include: [
+      {model: model.QuestKeyObject,
+        include : [{
+          model: model.KeyObject
+        }]
+       },
       {
         model: model.QuestQuestionModel,
         include: [
