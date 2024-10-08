@@ -53,8 +53,9 @@ const {
   BookCharacter,
   QuestionOptionModel,
   QuestQuestionModel,
-  sequelize: connection,
+  KeyObject,
   Sequelize,
+  sequelize: connection,
   Utils: {
     Op,
     sequelize,
@@ -270,6 +271,9 @@ QuestQuestionModel.belongsTo(QuestionOptionModel, {
   as: 'CorrectAnswer' 
 });
 
+//ASSOCIATION KEYMODEL
+
+
 
 module.exports = {
   User,
@@ -323,8 +327,9 @@ module.exports = {
   BookCharacter,
   QuestionOptionModel,
   QuestQuestionModel,
-  sequelize: connection,
+  KeyObject,
   Sequelize,
+  sequelize: connection,
   Utils: {
     Op,
     sequelize,
