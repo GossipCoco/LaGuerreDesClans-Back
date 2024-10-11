@@ -19,7 +19,25 @@ const countAllCharacters = () => {
       console.log("ERROR: ", err)
     })
   };
-
+  const CountNbOriginaleCharacterByUser = (usr) => {  
+    console.log("**** countAllCharacters   *****************");
+    const request = model.Gamer.findAndCountAll({
+      where: { UserId: usr },
+      attributes: ['Id']
+    });
+    const promises = []
+    promises.push(request)
+    return request
+    .then(w => {
+      const nbResult = Object.keys(w.rows).length
+      console.log("nbResult", nbResult)
+      return { count: nbResult }
+    })
+    .catch(err => {
+      console.log("ERROR: ", err)
+    })
+  
+  }
   const GetAllCharacters = (nav) => {
     console.log("************ GetAllCharacters ************", nav)
     return model.Character.findAll({
@@ -54,15 +72,7 @@ const countAllCharacters = () => {
         model: model.Clan,
         attributes:['Name', 'Image']
       }]
-    })
-      .then(w => {
-        return Promise.all(w);
-      })
-      .catch(err => {
-        console.log("ERROR: ", err)
-        return Promise.reject(err);
-      })
-  
+    }) 
   };
   const GetAllNamesAndIdsCharacters = () => {
     return model.Character.findAll({
@@ -101,7 +111,6 @@ const GetCharacterByName = (name) => {
     where: { Id: name },
     include: [
       { model: model.Chronology},
-      // { model: model.CharacterImage },
       { model: model.Grade },
       {
         model: model.Clan,
@@ -119,12 +128,6 @@ const GetCharacterByName = (name) => {
         ],
         order: [["ClanId", "ASC"]],
       },
-      
-      // { model: model.CharacterImage },
-      // {
-      //   model: model.RelationCharacters,
-      //   include: [{ model: model.TypeRelation }]
-      // },
     ],
   });
 };
@@ -143,8 +146,7 @@ const GetCharacterByNameSearch = (name) => {
     include: [      
       { model: model.Chronology},
       { model: model.RelationCharacters },
-      { model: model.Grade },
-      {
+      { model: model.Grade },      {
         model: model.Clan,
         include: [{ model: model.Location }],
       },
@@ -172,8 +174,6 @@ const GetAllNamesOfAllCharacters = async () => {
     ],
     raw: true,
   });
-
-  // Récupérer les noms et IDs depuis la table Gamer
   const gamerNames = await model.Gamer.findAll({
     attributes: [
       ['Id', 'Id'],
@@ -182,31 +182,10 @@ const GetAllNamesOfAllCharacters = async () => {
     raw: true,
   });
   const combinedNames = [...characterNames, ...gamerNames];
-
-  // Trier le tableau combiné par ordre alphabétique du nom
   combinedNames.sort((a, b) => a.Name.localeCompare(b.Name));
-
   return combinedNames;
 }
-const CountNbOriginaleCharacterByUser = (usr) => {  
-  console.log("**** countAllCharacters   *****************");
-  const request = model.Gamer.findAndCountAll({
-    where: { UserId: usr },
-    attributes: ['Id']
-  });
-  const promises = []
-  promises.push(request)
-  return request
-  .then(w => {
-    const nbResult = Object.keys(w.rows).length
-    console.log("nbResult", nbResult)
-    return { count: nbResult }
-  })
-  .catch(err => {
-    console.log("ERROR: ", err)
-  })
 
-}
 const GetOriginaleCharacterByUser = (usr, nav) => {  
   console.log("GetOriginaleCharacterByUser", usr, nav);
   return model.Gamer.findAll({
@@ -292,7 +271,10 @@ const CreateAnOriginalCharacter = (usr, data, imagePath) => {
     Status: data.Status,
     Genre: data.Genre,
     GradeId: data.GradeId,
-    Personnality: data.Personnality
+    Personnality: data.Personnality,
+    KitName: data.KitName,
+    ApprenticeName: data.ApprenticeName,
+    WarriorName: data.WarriorName
   }
   const firstRequest = model.Gamer.create(newOriginaleCharacter)
   promises.push(firstRequest)
@@ -304,7 +286,6 @@ const CreateAnOriginalCharacter = (usr, data, imagePath) => {
       console.log(err);
       return Promise.reject(err);
     })
-
 }
   module.exports = {
     countAllCharacters,

@@ -34,7 +34,7 @@ const countAllFictionsOnBases = () => {
 };
 
 const GetAllFictionsOnBase = (nav) => {  
-  console.log("**** GetAllFictions ****",nav);
+  console.log("**** GetAllFictionsOnBase ****",nav);
   return model.Fiction.findAll({    
     order: [["Title", "ASC"]],
     offset: nav.step * nav.current,
@@ -113,8 +113,7 @@ const GetAllFictionsByName = (name, nav) => {
         attributes: ['Id', 'UserName']
       },
       { model: model.FictionIllustration },
-      { model: model.Chapter },
-      { model: model.User, attributes: ['Id', 'UserName'] },
+      { model: model.Chapter },      
       {
         model: model.Game,
         include: [
@@ -225,7 +224,6 @@ const GetLastChapterOfAFiction = (FictionId) => {
       NextChapterId: null
     },
     include: [
-      // { model: model.Comment},
       {
       model: model.ChapterLocation,
       include: [{
@@ -237,7 +235,7 @@ const GetLastChapterOfAFiction = (FictionId) => {
 const GetFiveLastChapByUser = (usr) => {
   console.log("**** GetFiveLastChapByUser ****", usr);
   return model.Chapter.findAll({
-    limit: 4,
+    limit: 3,
     attributes: ['Id', 'Title', 'DateCreation', 'Image'],
     order: [['DateCreation', 'DESC']],
     include: [{

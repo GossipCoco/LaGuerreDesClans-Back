@@ -59,6 +59,15 @@ const Gamer = connection.define(
         Genre: {
             type: DataTypes.STRING(255)
         },
+        KitName: {
+            type: DataTypes.STRING(255)
+        },
+        ApprenticeName: {
+            type: DataTypes.STRING(255)
+        },
+        WarriorName: {
+            type: DataTypes.STRING(255)
+        },
     },
     {
         tableName: 'Gamer', // Nom de la table
