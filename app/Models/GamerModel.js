@@ -7,9 +7,8 @@ const Gamer = connection.define(
     "Gamer",
     {
         Id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             primaryKey: true,
-            autoIncrement: true // Définit le champ comme auto-incrémenté
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -69,10 +68,7 @@ const Gamer = connection.define(
             type: DataTypes.STRING(255)
         },
     },
-    {
-        tableName: 'Gamer', // Nom de la table
-        timestamps: true // Gère automatiquement createdAt et updatedAt
-    }
+    { freezeTableName: true, timestamps: false }
 );
 
 module.exports = Gamer;

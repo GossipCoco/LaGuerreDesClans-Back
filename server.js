@@ -9,7 +9,8 @@ const http = require('http')
 const app = express();
 const helmet = require("helmet")
 const SocketIOController = require('./app/controllers/socketIOController')
-
+const multer = require('multer');
+const upload = multer();
 
 
 const Home = require('./app/routes/home')
@@ -56,7 +57,9 @@ const corsOptions = {
 app
   .use('*',cors(corsOptions))
   .use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+  .use(express.json())
   .use(bodyParser.json({ limit: '50mb', extended: true }))
+  .use(express.urlencoded({ extended: true }))
   .use(helmet())
   .use(limiter)
   .use('/Home', Home)
