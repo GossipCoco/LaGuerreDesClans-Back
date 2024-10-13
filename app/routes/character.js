@@ -17,6 +17,6 @@ router
 .post('/allcharacters', Character.GetAllCharacters)
 .post('/GetAllCharactersDashboard', Character.GetAllCharactersDashboard)
 .post('/createANewCharacter', createUploadMiddleware('Characters/').single('image'), Character.CreateANewCharacter)
-.post('/CreateAnOriginalCharacter/:id', createUploadMiddleware('Gamer/').single('image'), Character.CreateAnOriginalCharacter)
+.post('/CreateAnOriginalCharacter/:id', createUploadMiddleware('Gamer/').any(), Character.CreateAnOriginalCharacter)
 
 module.exports = router

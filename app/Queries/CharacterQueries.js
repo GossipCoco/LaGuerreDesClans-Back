@@ -251,9 +251,7 @@ const CreateANewCharacter = (data) => {
     });
 };
 const CreateAnOriginalCharacter = (usr, data, imagePath) => {
-  console.log("CreateAnOriginalCharacter", usr, data);
-  let UserName = data.UserName;
-  var str = Name.replace(/\s+/g, '');
+  console.log("******CreateAnOriginalCharacter******", usr, data, imagePath);
   const date = new Date().toISOString()
   const promises = []
   const Id =  uuidv4()
@@ -263,7 +261,7 @@ const CreateAnOriginalCharacter = (usr, data, imagePath) => {
     createdAt: date,
     updatedAt: date,
     UserId: usr,
-    UserName: UserName,
+    UserName: data.UserName,
     Image:Image,
     Description: data.Description,
     Biography: data.Description,

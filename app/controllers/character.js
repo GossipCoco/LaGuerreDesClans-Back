@@ -47,12 +47,13 @@ Character.GetOneOriginaleCharacterByName = (req, res) => {
     handleResponse(res, query.GetOneOriginaleCharacterByName(req.params.id))
 }
 Character.CreateAnOriginalCharacter = (req, res) => {
+    console.log("CreateAnOriginalCharacter", req.params.id, req.body, req.files)
     const usr = req.params.id
-    this.data = req.body
-    const imageFile = req.file;
-    if (imagePath) {
-        data.Image = imageFile.filename;
+    const data = req.body
+    const imageFile = req.files;
+    if (imageFile) {
+        data.Image = imageFile.originalname;
     }
-    handleResponse(res, query.CreateAnOriginalCharacter(usr, data, imagePath))
+    handleResponse(res, query.CreateAnOriginalCharacter(usr, data, imageFile.originalname))
 }
 module.exports = Character
