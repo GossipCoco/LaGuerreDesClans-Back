@@ -3,6 +3,8 @@ const model = require('../Models');
 require('../Models/associations');
 const functions = require('../Functions/countFunctions')
 
+const WhereByUser =  { model: model.User, attributes: ['Id', 'UserName']}
+
 const countAllMyFictions = (usr) => {
   console.log("************ countAllMyFictions********* ", usr);
   const promises = []
@@ -19,6 +21,7 @@ const countAllFictionsOnBases = () => {
   promises.push(request)  
   return functions.countFuntion(request)
 }
+
 const CountTotalWordBuUser = (usr) => {
   console.log("**** CountTotalWordsByUser ****", usr);
   return model.Chapter.findAll({
@@ -28,13 +31,10 @@ const CountTotalWordBuUser = (usr) => {
     ],
     include: [{
       model: model.Fiction,
-      attributes: [], // Ne sélectionne aucun attribut spécifique de Fiction ici si non nécessaire
       include: [{
         model: model.Game,
-        attributes: [], // Idem pour Game
         include: [{
           model: model.UserGame,
-          attributes: [], // Idem pour UsersGame
           where: { UserId: usr }
         }]
       }]
@@ -60,7 +60,6 @@ const CountTotalWordByUserV2 = (usr) => {
   });
 };
 
-
 const GetAllFictionsOnBase = (nav) => {  
   console.log("**** GetAllFictionsOnBase ****",nav);
   return model.Fiction.findAll({    
@@ -69,9 +68,7 @@ const GetAllFictionsOnBase = (nav) => {
     limit: nav.step,
     include: [
       { model: model.Comments },
-      { model: model.User,
-        attributes: ['Id', 'UserName']
-      },
+      WhereByUser,
       { model: model.FictionIllustration },
       { model: model.Chapter },      
       { model: model.Game,
@@ -81,7 +78,7 @@ const GetAllFictionsOnBase = (nav) => {
             include: [ { model: model.Character,
                 attributes: ['Id', 'CurrentName', 'Image'],
                 include: [ { model: model.Grade },
-                  {model: model.Warrior,
+                  { model: model.Warrior,
                     include: [{ model: model.Clan }],
                   },
                 ],
@@ -101,10 +98,8 @@ const GetAllFictionsByUser = (usr, nav) => {
     offset: nav.step * nav.current,
     limit: nav.step,
     include: [
+      WhereByUser,
       { model: model.Comments },
-      { model: model.User,
-        attributes: ['Id', 'UserName']
-      },
       { model: model.FictionIllustration },
       { model: model.Chapter },      
       { model: model.Game,
@@ -178,18 +173,15 @@ const GetAllFictionsByName = (name, nav) => {
 
 const GetAllCommentsByFiction = (id, nav) => {
   return model.Comments.findAll({
-    // offset: nav.step * nav.current,
-    // limit: nav.step,
     include:[
       {
         model: model.User,
         attributes:['Id', 'avatar', 'LastName', 'FirstName']
       },
-      {
-      model: model.Fiction,      
-      where: 
-      { Title: id }
-    }],
+      { model: model.Fiction,      
+        where: { Title: id }
+      }
+    ],
   })
 }
 const AddRating = (id, data) => {

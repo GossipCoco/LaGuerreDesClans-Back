@@ -2,29 +2,28 @@ const { v4: uuidv4 } = require('uuid');
 const model = require('../Models');
 require('../Models/associations');
 
+const ClanLocation = {
+  model: model.ChapterLocation,
+  include: [{
+    model: model.Location
+  }]
+}
+
 const GetAChapterByName = (name, nav) => {
     console.log("**** GetAChapterByName ****", name, nav);
     console.log(name, nav)
     return model.Chapter.findOne({
       where: { Title: { [model.Utils.Op.like]: `%${name}%` }, },
       include: [
-        
-        // { model: model.Comment},
+        ClanLocation,
         {
           model: model.ChapterIllustration,
           include: [{ model: model.Illustration }]
         },
         {
-          model: model.ChapterLocation,
-          include: [{
-            model: model.Location
-          }]
-        },
-        {
           model: model.Fiction,
           attributes: ['Id','UserId', 'Title'],
           include: [
-            // { model: model.Comment},
             { model: model.FictionIllustration },
             {
               model: model.User,
@@ -40,13 +39,7 @@ const GetAChapterByName = (name, nav) => {
         FictionId: FictionId,
         NextChapterId: null
       },
-      include: [
-        {
-        model: model.ChapterLocation,
-        include: [{
-          model: model.Location
-        }]
-      }]
+      include: [ClanLocation]
     })
   }
   const GetFiveLastChapByUser = (usr) => {
@@ -87,7 +80,8 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
         if (data.NumberChapter === 1) {
           return Promise.all(promises);
         } else {
-          const secondRequest = model.Chapter.update(precedentChapter, { where: { Id: data.PrecedentChapterId } })
+          const secondRequest = model.Chapter.update(precedentChapter,
+            { where: { Id: data.PrecedentChapterId } })
           promises.push(secondRequest)
           return secondRequest
             .then((response) => {
@@ -100,8 +94,6 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
         return Promise.reject(err);
       });
   }
-
-
   const EditChapter = (id, data) => {
     console.log("**** EditChapter ****", id, data);
     const promises = []

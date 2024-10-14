@@ -1,4 +1,5 @@
 const queries = require("../Queries/FictionQueries");
+const query = require('../Queries/CreationUpdateGameQueries')
 const { handleResponse } = require("./function");  // Importer la fonction
 const Fiction = {}
 

@@ -1,5 +1,6 @@
 const model = require('../Models/GameModel');
 const query = require("../Queries/GameQueries");
+const queries = require('../Queries/CreationUpdateGameQueries')
 const { handleResponse } = require("./function");  // Importer la fonction
 const Game = {}
 Game.GetAllGames = (req, res) => {
@@ -25,16 +26,9 @@ Game.CreateANewGame = (req, res) => {
     return res.status(400).send({ message: "All fields are required" });
   }
   const data = { Title, Summary, FirstCharacterId, SecondCharacterId, LocationId };
-  handleResponse(res, query.CreateANewGame(UserId, data, imagePath))
-  // queries.CreateANewGame(UserId, data, imagePath)
-  //   .then((w) => {
-  //     res.status(200).send({ message: "Game created successfully", data: w });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     res.status(500).send(err);
-  //   });    
-}
+  handleResponse(res, queries.CreateANewGame(UserId, data, imagePath))
+
+  }
 Game.GetFiveLastGameByUser = (req, res) => {  
   handleResponse(res, query.GetFiveLastGameByUser(req.params.id))
 }
