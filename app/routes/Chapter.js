@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Fiction = require('../controllers/fiction');
+const Fiction = require('../controllers/chapter');
 
  // Assume this is your multer config
 const createUploadMiddleware = require('../middleware/UploadGeneric');

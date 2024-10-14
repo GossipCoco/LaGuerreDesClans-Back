@@ -108,7 +108,7 @@ const countAllCharacters = () => {
 const GetCharacterByName = (name) => {
   console.log("**** GetCharacterByName ****", name);
   return model.Character.findOne({
-    where: { Id: name },
+    where: { CurrentName: name },
     include: [
       { model: model.Chronology},
       { model: model.Grade },
