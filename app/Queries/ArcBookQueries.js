@@ -11,7 +11,6 @@ const GetAllArcsWithBooks = (nav) => {
         }]
     })
 }
-
 const GetAllBooks = (nav) =>{
     console.log("************ GetAllBooks ************", nav)
     return model.Book.findAll({

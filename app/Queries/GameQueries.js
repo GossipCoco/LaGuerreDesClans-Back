@@ -26,21 +26,15 @@ const countAllGames = () => {
   promises.push(request)
   return functions.countFuntion(request)
 };
-
-
-
-
 const GetAllGames = (nav) => {
   console.log("**** All Games ****", nav, nav.step * nav.current, nav.step);
   return model.Game.findAll({
     offset: nav.step * nav.current,
     limit: nav.step,
-    // order: [["DateCreation", "ASC"]],
     where: {
       TypeGameId: 'Fiction',
     },
     include: [
-      // { model: model.UserGame },
       {
         model: model.Fiction,
         order: [["Title", "ASC"]],
@@ -60,7 +54,6 @@ const GetAllGamesByUser = (user, nav) => {
     include: [  
       {
         model: model.Fiction,
-        // order: ['Title'],
         where: {
           UserId: { [model.Utils.Op.like]: `%${user}%` },
         },        
@@ -97,9 +90,7 @@ const GetAllGamesByCharacter = (character, nav) => {
         where: {
           CharacterId: { [model.Utils.Op.like]: `%${character}%` },
         },
-      }, 
-      // { model: model.UserGame },
-      {
+      },{
         model: model.Fiction,
         order: [["Title", "ASC"]],
         include: [{
@@ -132,8 +123,6 @@ const GetFiveLastGameByUser = (usr) => {
     ]
   })
 }
-
-
 const AddANewCharacterToGameAndFiction = (Id, data) => {
   console.log("**** AddANewCharacterToGameAndFiction ****", Id, data);
   const promises = []
@@ -155,7 +144,6 @@ const AddANewCharacterToGameAndFiction = (Id, data) => {
       return Promise.reject(err);
     });
 }
-
 module.exports = {
   countAllMyGames,
   countAllGames,

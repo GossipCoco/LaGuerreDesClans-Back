@@ -258,7 +258,6 @@ const CreateAnOriginalCharacter = (usr, data, imagePath) => {
     ApprenticeName: data.ApprenticeName,
     WarriorName: data.WarriorName
   }
-  console.log("newOriginaleCharacter", newOriginaleCharacter)
   const firstRequest = model.Gamer.create(newOriginaleCharacter)
   promises.push(firstRequest)
   return firstRequest

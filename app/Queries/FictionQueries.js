@@ -4,6 +4,7 @@ require('../Models/associations');
 const functions = require('../Functions/countFunctions')
 
 const WhereByUser =  { model: model.User, attributes: ['Id', 'UserName']}
+const modelChapter = { model: model.Chapter }
 
 const countAllMyFictions = (usr) => {
   console.log("************ countAllMyFictions********* ", usr);
@@ -70,7 +71,7 @@ const GetAllFictionsOnBase = (nav) => {
       { model: model.Comments },
       WhereByUser,
       { model: model.FictionIllustration },
-      { model: model.Chapter },      
+      modelChapter,      
       { model: model.Game,
         include: [
           { model: model.GameCharacter,
@@ -101,7 +102,7 @@ const GetAllFictionsByUser = (usr, nav) => {
       WhereByUser,
       { model: model.Comments },
       { model: model.FictionIllustration },
-      { model: model.Chapter },      
+      modelChapter,      
       { model: model.Game,
         include: [
           { model: model.GameCharacter,
@@ -136,7 +137,7 @@ const GetAllFictionsByName = (name, nav) => {
         attributes: ['Id', 'UserName']
       },
       { model: model.FictionIllustration },
-      { model: model.Chapter },      
+      modelChapter,      
       {
         model: model.Game,
         include: [          

@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const model = require('../Models');
 require('../Models/associations');
 
+const functions = require('../Functions/countFunctions')
 /**
  * 
  * @returns {Object}
@@ -11,16 +12,7 @@ const GetTotalQuest = () => {
     const promises = []
     const request = model.Quest.findAndCountAll({})
     promises.push(request)
-    return request
-      .then(w => {
-        const nbResult = Object.keys(w.rows).length
-        console.log("nbResult", nbResult)
-        return { count: nbResult }
-      })
-      .catch(err => {
-        console.log("ERROR: ", err)
-      })
-
+    return functions.countFuntion(request)
 }
 /**
  * 
@@ -33,12 +25,7 @@ const GetAllQuests = (nav) => {
         offset: nav.step * nav.current,
         limit: nav.step,
         order: [["Id", "ASC"]],
-        include: [
-          { model: model.QuestParallax
-          },
-          {
-            model: model.QuestImage
-        }]
+        include: [{  model: model.QuestImage }]
     })
 }
 const GetQuestById = (id) => {
@@ -62,10 +49,7 @@ const GetQuestById = (id) => {
         include: [{
           model: model.Parallax
         }]
-      },
-      {
-        model: model.QuestImage
-    }]
+      }]
   })
 }
 module.exports = {
