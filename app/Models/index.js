@@ -57,6 +57,7 @@ const QuestQuestionModel = require('./QuestQuestionModel')
 const QuestionOptionModel = require('./QuestionOptionModel')
 const KeyObject = require('./KeyObjectModel')
 const QuestKeyObject = require('./QuestKeyObjectModel')
+const GameGamer = require('./GameGamerModel')
 
 
 // Exporter les modèles
@@ -119,6 +120,7 @@ const models = {
   QuestQuestionModel,
   KeyObject,
   QuestKeyObject,
+  GameGamer,
   sequelize: connection,
   Utils: {
     Op,

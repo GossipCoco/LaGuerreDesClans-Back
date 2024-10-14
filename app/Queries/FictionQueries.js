@@ -116,7 +116,7 @@ const GetAllFictionsByName = (name, nav) => {
       { model: model.Chapter },      
       {
         model: model.Game,
-        include: [
+        include: [          
           {
             model: model.GameCharacter,
             attributes: ['Id'],
@@ -134,6 +134,12 @@ const GetAllFictionsByName = (name, nav) => {
               },
             ],
           },
+          {
+            model: model.GameGamer,
+            include: [{
+              model: model.Gamer
+            }]
+          }
         ],
       },      
      
@@ -141,16 +147,12 @@ const GetAllFictionsByName = (name, nav) => {
   });
 };
 const GetAChapterByName = (name, nav) => {
-  console.log("**** GetAChapterByName ****");
+  console.log("**** GetAChapterByName ****", name, nav);
   console.log(name, nav)
   return model.Chapter.findOne({
-    where: {
-      [model.Utils.Op.or]: [
-        { Id: { [model.Utils.Op.like]: `%${name}%` }, },
-        { Title: { [model.Utils.Op.like]: `%${name}%` }, }
-      ]
-    },
+    where: { Title: { [model.Utils.Op.like]: `%${name}%` }, },
     include: [
+      
       // { model: model.Comment},
       {
         model: model.ChapterIllustration,
@@ -172,7 +174,7 @@ const GetAChapterByName = (name, nav) => {
             model: model.User,
             attributes: ['Id', 'UserName']
           }]
-      }]
+      },]
   });
 };
 
@@ -190,7 +192,7 @@ const CountTotalWordBuUser = (usr) => {
         model: model.Game,
         attributes: [], // Idem pour Game
         include: [{
-          model: model.UsersGame,
+          model: model.UserGame,
           attributes: [], // Idem pour UsersGame
           where: { UserId: usr }
         }]

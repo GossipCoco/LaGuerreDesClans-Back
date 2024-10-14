@@ -55,6 +55,7 @@ const {
   QuestQuestionModel,
   KeyObject,
   QuestKeyObject,
+  GameGamer,
   Sequelize,
   sequelize: connection,
   Utils: {
@@ -280,6 +281,12 @@ Quest.hasMany(QuestKeyObject)
 QuestKeyObject.belongsTo(KeyObject, { foreignKey: 'KeyObjectId'})
 KeyObject.hasMany(QuestKeyObject)
 
+GameGamer.belongsTo(Game, {foreignKey: 'GameId'})
+Game.hasMany(GameGamer)
+
+GameGamer.belongsTo(Gamer, {foreignKey: 'GamerId'})
+Gamer.hasMany(GameGamer)
+
 module.exports = {
   User,
   Level,
@@ -334,6 +341,7 @@ module.exports = {
   QuestQuestionModel,
   KeyObject,
   QuestKeyObject,
+  GameGamer,
   Sequelize,
   sequelize: connection,
   Utils: {
