@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const model = require('../Models');
 require('../Models/associations');
+const functions = require('../Functions/countFunctions')
 
 const countAllCharacters = () => {
     console.log("**** countAllCharacters   *****************");
@@ -9,15 +10,7 @@ const countAllCharacters = () => {
     });
     const promises = []
     promises.push(request)
-    return request
-    .then(w => {
-      const nbResult = Object.keys(w.rows).length
-      console.log("nbResult", nbResult)
-      return { count: nbResult }
-    })
-    .catch(err => {
-      console.log("ERROR: ", err)
-    })
+    return functions.countFuntion(request)
   };
   const CountNbOriginaleCharacterByUser = (usr) => {  
     console.log("**** countAllCharacters   *****************");
@@ -26,17 +19,8 @@ const countAllCharacters = () => {
       attributes: ['Id']
     });
     const promises = []
-    promises.push(request)
-    return request
-    .then(w => {
-      const nbResult = Object.keys(w.rows).length
-      console.log("nbResult", nbResult)
-      return { count: nbResult }
-    })
-    .catch(err => {
-      console.log("ERROR: ", err)
-    })
-  
+    promises.push(request)    
+    return functions.countFuntion(request)  
   }
   const GetAllCharacters = (nav) => {
     console.log("************ GetAllCharacters ************", nav)
