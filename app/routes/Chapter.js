@@ -11,5 +11,6 @@ router
 .post('/Chapitre/:id', Fiction.GetAChapterByName)
 .post('/GetLastChapterOfAFiction/:id', Fiction.GetLastChapterOfAFiction)
 .post('/CreateAChapitre/:id', createUploadMiddleware('Fictions/').single('image'), Fiction.CreateANewChapter)
+.post('/EditChapter/:id', Fiction.EditChapter)
 
 module.exports = router;

@@ -357,7 +357,16 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
       return Promise.reject(err);
     });
 }
-
+const EditChapter = (id, data) => {
+  console.log("**** EditChapter ****", id, data);
+  const promises = []
+  const chapter = { Content: data.Content}
+  const request = model.Chapter.update(chapter, { where: { Id: data.Id } })
+  promises.push(request)
+  return request
+    .then(w => { return Promise.all(promises) })
+    .catch(err => { console.log("ERROR: ", err) })
+}
 const queries = {
   countAllFictionsOnBases,
   countAllMyFictions,
@@ -372,7 +381,8 @@ const queries = {
   AddRating,
   CreateCommentForAFiction,
   GetAllCommentsByFiction,
-  GetAllFictionsByUser
+  GetAllFictionsByUser,
+  EditChapter
 };
 
 module.exports = queries;

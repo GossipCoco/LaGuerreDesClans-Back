@@ -60,5 +60,7 @@ Fiction.GetAllCommentsByFiction = async (req, res) => {
 Fiction.GetAllFictionsByUser = async (req, res) => {
   handleResponse(res, queries.GetAllFictionsByUser(req.params.id, req.body));
 };
-
+Fiction.EditChapter = async (req, res) => {
+  handleResponse(res, queries.EditChapter(req.params.id, req.body))
+}
 module.exports = Fiction;
