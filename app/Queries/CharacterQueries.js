@@ -193,7 +193,10 @@ const GetOneOriginaleCharacterByName = (Name) => {
     where: { Username: Name }, 
     include:[{
       model: model.Clan
-    }]
+    },
+   {
+    model: model.Grade
+   }]
   })
 }
 const CreateANewCharacter = (data) => {

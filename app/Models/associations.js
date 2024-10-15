@@ -129,6 +129,9 @@ Game.hasMany(Fiction)
 Gamer.belongsTo(Clan, { foreignKey: 'ClanId'})
 Clan.hasMany(Gamer)
 
+Gamer.belongsTo(Grade, {foreignKey: 'GradeId'})
+Grade.hasMany(Gamer)
+
 //FICTION
 
 Fiction.belongsTo(User, { foreignKey: "UserId" });
