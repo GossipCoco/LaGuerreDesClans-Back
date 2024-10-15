@@ -96,31 +96,5 @@ User.UpdateUserInformations = (req, res) => {
       res.send(err).status(500)
     })
 }
-User.GetMessageByReceiverId = (req, res) => {
-  console.log(req.params.id, req.body)
-  UserQueries.GetMessageByReceiverId(req.params.id, req.body)
-  .then(w => {
-    res.send({ ob: w, res: true }).status(200)
-  })
-  .catch(err => {
-    console.log(err)
-    res.send(err).status(500)
-  })
-}
-User.ChangeStatusMessage = (req, res) => {
-  // console.log(req.body)
-  const status = req.body.status; // Assurez-vous de bien récupérer `status` du corps
-  if (!status) {
-      return res.status(400).send({ error: "Status is required" });
-  }
-  UserQueries.ChangeStatusMessage(req.params.id, status)
-  .then(w => {
-    res.send({ ob: w, res: true }).status(200)
-  })
-  .catch(err => {
-    console.log(err)
-    res.send(err).status(500)
-  })
-}
 
 module.exports = User

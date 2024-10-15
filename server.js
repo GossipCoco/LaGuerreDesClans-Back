@@ -12,7 +12,6 @@ const SocketIOController = require('./app/controllers/socketIOController')
 const multer = require('multer');
 const upload = multer();
 
-
 const Home = require('./app/routes/home')
 const User = require('./app/routes/user')
 const Character = require('./app/routes/character')
@@ -28,6 +27,7 @@ const imagegenRouter  = require('./app/routes/imagegen');
 const ArcBook = require('./app/routes/ArcBook')
 const Rating = require('./app/routes/Rating')
 const Chapter = require('./app/routes/Chapter')
+const Message = require('./app/routes/Message')
 const rateLimit = require('express-rate-limit');
 
 const limiter = rateLimit({
@@ -77,6 +77,7 @@ app
   .use('/ArcBook', ArcBook)
   .use('/chapter', Chapter)
   .use('/rating', Rating)
+  .use('/message', Message)
   .use(function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.status(404).send({ result: 'error' });
