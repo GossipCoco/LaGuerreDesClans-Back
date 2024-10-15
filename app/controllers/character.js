@@ -25,7 +25,11 @@ Character.GetOriginaleCharacterByUser = (req, res) => {
     const id = req.params.id
     const data = req.body
     handleResponse(res, query.GetOriginaleCharacterByUser(id, data))
-} 
+}
+Character.GetAllNamesAndIdsOriginaCharacters = (req, res) => {
+    console.log("GetAllNamesAndIdsOriginaCharacters", req.params.id)
+    handleResponse(res, query.GetAllNamesAndIdsOriginaCharacters(req.params.id))
+}
 Character.CreateANewCharacter = (req, res) => {
     const data = req.body;
     const imageFile = req.file;

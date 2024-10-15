@@ -82,6 +82,20 @@ const CreateANewGame = async (UserId, data, imagePath) => {
         CharacterId: data.SecondCharacterId
       };
       await model.GameCharacter.create(RequestCharacterSecond);
+      const RequestOriginalCharacterFirst = {
+        Id: uuidv4(),
+        GameId: gameId,
+        CharacterId: data.OriginalFirstCharacterId
+      };
+      await model.GameGamer.create(RequestOriginalCharacterFirst);
+  
+      // Associe le second personnage au jeu
+      const RequestOriginalCharacterSecond = {
+        Id: uuidv4(),
+        GameId: gameId,
+        CharacterId: data.OriginalSecondCharacterId
+      };
+      await model.GameCharacter.create(RequestOriginalCharacterSecond);
   
       // Une fois toutes les opérations terminées, redirige l'utilisateur
       console.log('Redirection après création de la fiction');

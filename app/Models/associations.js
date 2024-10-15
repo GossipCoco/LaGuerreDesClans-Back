@@ -126,6 +126,8 @@ Clan.hasMany(Location);
 Fiction.belongsTo(Game, { foreignKey: "GameId" })
 Game.hasMany(Fiction)
 
+Gamer.belongsTo(Clan, { foreignKey: 'ClanId'})
+Clan.hasMany(Gamer)
 
 //FICTION
 
