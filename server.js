@@ -28,13 +28,13 @@ const ArcBook = require('./app/routes/ArcBook')
 const Rating = require('./app/routes/Rating')
 const Chapter = require('./app/routes/Chapter')
 const Message = require('./app/routes/Message')
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 
-const limiter = rateLimit({
-  windowMs: 15 * 60, // 15 minutes * 1000
-  max: 500, // limite chaque IP à 100 requêtes par windowMs
-  message: 'Trop de requêtes créées à partir de cette IP, veuillez réessayer après 15 minutes'
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60, // 15 minutes * 1000
+//   max: 500, // limite chaque IP à 100 requêtes par windowMs
+//   message: 'Trop de requêtes créées à partir de cette IP, veuillez réessayer après 15 minutes'
+// });
 
 const corsOptions = {
   // origin: '*',
@@ -61,7 +61,7 @@ app
   .use(bodyParser.json({ limit: '50mb', extended: true }))
   .use(express.urlencoded({ extended: true }))
   .use(helmet())
-  .use(limiter)
+  // .use(limiter)
   .use('/Home', Home)
   .use('/quest', Quest)
   .use('/character', Character)
