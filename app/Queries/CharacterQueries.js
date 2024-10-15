@@ -97,32 +97,49 @@ const countAllCharacters = () => {
   };
 
   
-const GetCharacterByName = (name) => {
-  console.log("**** GetCharacterByName ****", name);
-  return model.Character.findOne({
-    where: { CurrentName: name },
-    include: [
-      { model: model.Chronology},
-      { model: model.Grade },
-      {
-        model: model.Clan,
-        include: [{ model: model.Location }],
-        order: [["Id", "ASC"]],
-      },
-      {
-        model: model.Warrior,
-        include: [
-          {
-            model: model.Clan,
-            include: [{ model: model.Location }],
-            order: [["Id", "ASC"]],
-          },
-        ],
-        order: [["ClanId", "ASC"]],
-      },
-    ],
-  });
-};
+  const GetCharacterByName = (name) => {
+    console.log("**** GetCharacterByName ****", name);
+    return model.Character.findOne({
+      where: { CurrentName: name },
+      include: [
+        { model: model.Chronology },
+        { model: model.Grade },
+        {
+          model: model.Clan,
+          include: [{ model: model.Location }],
+          order: [["Id", "ASC"]],
+        },
+        {
+          model: model.Warrior,
+          include: [
+            {
+              model: model.Clan,
+              include: [{ model: model.Location }],
+              order: [["Id", "ASC"]],
+            },
+          ],
+          order: [["ClanId", "ASC"]],
+        },
+        {
+          model: model.RelationCharacters,
+          as: "RelationsOne",
+          include: [
+            { model: model.Character, as: "CharacterTwo" },
+            { model: model.TypeRelation, as: "TypeRelation" },
+          ],
+        },
+        {
+          model: model.RelationCharacters,
+          as: "RelationsTwo",
+          include: [
+            { model: model.Character, as: "CharacterOne" },
+            { model: model.TypeRelation, as: "TypeRelation" },
+          ],
+        },
+      ],
+    });
+  };
+  
 /**
  * 
  * @param {STRING} name 

@@ -158,8 +158,6 @@ User.hasMany(Comments);
 
 //OTHERS
 
-RelationCharacters.belongsTo(TypeRelation);
-TypeRelation.hasMany(RelationCharacters);
 
 Prey.belongsTo(OtherAnimal, { foreignKey: "Id" });
 OtherAnimal.hasMany(Prey);
@@ -214,11 +212,7 @@ Game.hasMany(GameCharacter);
 GameCharacter.belongsTo(Character, { foreignKey: "CharacterId" });
 Character.hasMany(GameCharacter);
 
-RelationCharacters.belongsTo(Character, { foreignKey: "IdCharacterOne" });
-Character.hasMany(RelationCharacters);
 
-RelationCharacters.belongsTo(Character, { foreignKey: "IdCharacterTwo" });
-Character.hasMany(RelationCharacters);
 
 ChapterIllustration.belongsTo(Chapter, { foreignKey: "ChapterId" });
 Chapter.hasMany(ChapterIllustration);
@@ -291,6 +285,33 @@ Game.hasMany(GameGamer)
 
 GameGamer.belongsTo(Gamer, {foreignKey: 'GamerId'})
 Gamer.hasMany(GameGamer)
+
+/* RELATION CHARACTER */
+// Character model
+Character.hasMany(RelationCharacters, {
+  foreignKey: "IdCharacterOne",
+  as: "RelationsOne",
+});
+Character.hasMany(RelationCharacters, {
+  foreignKey: "IdCharacterTwo",
+  as: "RelationsTwo",
+});
+
+// RelationCharacters model associations
+RelationCharacters.belongsTo(Character, {
+  foreignKey: "IdCharacterOne",
+  as: "CharacterOne",
+});
+RelationCharacters.belongsTo(Character, {
+  foreignKey: "IdCharacterTwo",
+  as: "CharacterTwo",
+});
+RelationCharacters.belongsTo(TypeRelation, {
+  foreignKey: "TypeRelationId", // Spécifiez la clé étrangère si nécessaire
+  as: "TypeRelation",
+});
+
+
 
 module.exports = {
   User,
