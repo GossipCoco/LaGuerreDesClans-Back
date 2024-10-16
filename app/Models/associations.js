@@ -287,6 +287,7 @@ GameGamer.belongsTo(Gamer, {foreignKey: 'GamerId'})
 Gamer.hasMany(GameGamer)
 
 /* RELATION CHARACTER */
+
 // Character model
 Character.hasMany(RelationCharacters, {
   foreignKey: "IdCharacterOne",
