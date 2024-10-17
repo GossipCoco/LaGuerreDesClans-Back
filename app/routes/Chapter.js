@@ -10,7 +10,7 @@ router
 .get('/GetFiveLastChapByUser/:id', Chapter.GetFiveLastChapByUser)
 .post('/Chapitre/:id', Chapter.GetAChapterByName)
 .post('/GetLastChapterOfAFiction/:id', Chapter.GetLastChapterOfAFiction)
-.post('/CreateAChapitre/:id', createUploadMiddleware('Fictions/').single('image'), Fiction.CreateANewChapter)
+.post('/CreateAChapitre/:id', createUploadMiddleware('Fictions/').single('image'), Chapter.CreateANewChapter)
 .post('/EditChapter/:id', Chapter.EditChapter)
 
 module.exports = router;
