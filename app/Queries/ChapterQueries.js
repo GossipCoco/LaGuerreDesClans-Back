@@ -9,11 +9,34 @@ const ClanLocation = {
   }]
 }
 
-const GetAChapterByName = (name, nav) => {
-    console.log("**** GetAChapterByName ****", name, nav);
-    console.log(name, nav)
+const GetAChapterById= (Id) => {
+  console.log("**** GetAChapterByName ****", Id);
+  console.log(Id)
+  return model.Chapter.findOne({
+    where: { Id: { [model.Utils.Op.like]: `%${Id}%` }, },
+    include: [
+      ClanLocation,
+      {
+        model: model.ChapterIllustration,
+        include: [{ model: model.Illustration }]
+      },
+      {
+        model: model.Fiction,
+        attributes: ['Id','UserId', 'Title'],
+        include: [
+          { model: model.FictionIllustration },
+          {
+            model: model.User,
+            attributes: ['Id', 'UserName']
+          }]
+      },]
+  });
+};
+
+const GetAChapterByName = (title) => {
+    console.log("**** GetAChapterByName ****", title);
     return model.Chapter.findOne({
-      where: { Title: { [model.Utils.Op.like]: `%${name}%` }, },
+      where: { Title: { [model.Utils.Op.like]: `%${title}%` }, },
       include: [
         ClanLocation,
         {
@@ -105,6 +128,7 @@ const CreateANewChapter = (FictionId, data, imagePath) => {
       .catch(err => { console.log("ERROR: ", err) })
   }
   const queries = {
+    GetAChapterById,
     GetAChapterByName,
     GetLastChapterOfAFiction,
     GetFiveLastChapByUser,

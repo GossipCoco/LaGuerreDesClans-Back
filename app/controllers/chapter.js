@@ -2,9 +2,13 @@ const query = require('../Queries/ChapterQueries')
 
 const { handleResponse } = require("./function");  // Importer la fonction
 const Chapter = {}
-
+Chapter.GetAChapterById = async (req, res) => {
+  console.log("********* GetAChapterById ************", req.params.id)
+  handleResponse(res, query.GetAChapterById(req.params.id))
+}
 Chapter.GetAChapterByName = async (req, res) => {
-    handleResponse(res, query.GetAChapterByName(req.params.id, req.body));
+  console.log("********* GetAChapterByName ************", req.params.id)
+    handleResponse(res, query.GetAChapterByName(req.params.id));
   };
   Chapter.GetLastChapterOfAFiction = async (req, res) => {
     handleResponse(res, query.GetLastChapterOfAFiction(req.params.id));
