@@ -243,7 +243,23 @@ const CreateCommentForAFiction = (id, data) => {
       return Promise.reject(err);
     });
 }
-
+const UpdateFictionIllustration = (id, image) => {
+  
+  console.log("**** UpdateFictionIllustration ****",id, image);
+  const promises = []
+  const newImage = '/images/Fictions/'+image
+  const request = model.Fiction.update({ Image: newImage }, { where: { Id: id } })
+  promises.push(request)
+  return request
+    .then((w) => {
+      console.log(w)
+      return Promise.all(promises);
+    })
+    .catch((err) => {
+      console.log(err);
+      return Promise.reject(err);
+    });
+}
 const queries = {
   countAllFictionsOnBases,
   countAllMyFictions,
@@ -255,6 +271,7 @@ const queries = {
   CreateCommentForAFiction,
   GetAllCommentsByFiction,
   GetAllFictionsByUser,
+  UpdateFictionIllustration
 };
 
 module.exports = queries;

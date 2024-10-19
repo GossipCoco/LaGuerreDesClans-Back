@@ -3,7 +3,7 @@ const config = require("../config/auth.config.js");
 const UserQueries = require('../Queries/UserQueries.js')
 const User = {};
 User.Login = (req, res) => {
-
+  console.log(req.body)
   const { Email, password } = req.body;
   const Pwd = req.body.Password
   UserQueries.GetUserByEmail(Email)

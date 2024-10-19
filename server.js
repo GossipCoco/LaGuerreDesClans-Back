@@ -41,12 +41,6 @@ const corsOptions = {
   origin: [
     'http://localhost:8081',
     "http://192.168.1.14:8081",
-    "http://172.20.1.151:8081",
-    "http://192.168.1.14:8081",
-    'http://10.20.0.22:8081',
-    'http://192.168.253.153:8081',
-    'http://192.168.62.223:8081',
-    'http://10.117.60.254:8081'
   ],
   cors: {
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -56,9 +50,9 @@ const corsOptions = {
 }
 app
   .use('*',cors(corsOptions))
-  .use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+  .use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
   .use(express.json())
-  .use(bodyParser.json({ limit: '50mb', extended: true }))
+  .use(bodyParser.json({ limit: '100mb', extended: true }))
   .use(express.urlencoded({ extended: true }))
   .use(helmet())
   // .use(limiter)

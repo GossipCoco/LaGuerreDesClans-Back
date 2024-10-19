@@ -1,6 +1,6 @@
 const util = require("util");
 const multer = require("multer");
-const maxSize = 2 * 1920 * 1920;
+const maxSize = 2 * 3550 * 3550;
 const fs = require('fs');
 const path = require('path');
 

@@ -64,4 +64,10 @@ Fiction.GetAllFictionsByUser = async (req, res) => {
 Fiction.EditChapter = async (req, res) => {
   handleResponse(res, queries.EditChapter(req.params.id, req.body))
 }
+Fiction.UpdateFictionIllustration = async (req, res) => {
+  const id = req.params.id
+  const imagePath = req.file ? req.file.filename : null;
+  handleResponse(res, queries.UpdateFictionIllustration(id, imagePath))
+
+}
 module.exports = Fiction;
