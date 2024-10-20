@@ -1,5 +1,5 @@
 const Quest = {}
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const query = require("../Queries/QuestQueries");
 
 Quest.GetTotalQuest = (req, res) => {

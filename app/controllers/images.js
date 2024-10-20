@@ -1,5 +1,5 @@
 const query = require("../Queries/ImageQueries");
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const uploadFile = require("../middleware/upload");
 const uploadFileAvatar = require("../middleware/uploadAvatar");
 const fs = require("fs");

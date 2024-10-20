@@ -1,5 +1,5 @@
 const query = require("../Queries/LocationQueries");
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const Clan = {};
 
 Clan.GetAllClans = (req, res) => {

@@ -1,5 +1,5 @@
 const query = require('../Queries/ArcBookQueries')
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const ArcBook = {}
 
 ArcBook.GetAllArcsWithBooks = (req, res) => {

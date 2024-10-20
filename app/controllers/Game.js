@@ -1,7 +1,7 @@
 const model = require('../Models/GameModel');
 const query = require("../Queries/GameQueries");
 const queries = require('../Queries/CreationUpdateGameQueries')
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const Game = {}
 Game.GetAllGames = (req, res) => {
   handleResponse(res, query.GetAllGames(req.body))    

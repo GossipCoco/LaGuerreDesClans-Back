@@ -1,5 +1,5 @@
 const Grade = {};
-const { handleResponse } = require("./function");  // Importer la fonction
+const { handleResponse } = require("../Functions/handleResponse");  // Importer la fonction
 const query = require('../Queries/GradeQueries')
 
 Grade.GetAllGrades = (req, res) => {

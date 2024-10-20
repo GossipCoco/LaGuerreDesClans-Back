@@ -1,5 +1,5 @@
 const query = require('../Queries/MessageQueries')
-const { handleResponse } = require("./function"); 
+const { handleResponse } = require("../Functions/handleResponse"); 
 
 const Message = {}
 Message.GetMessageByReceiverId = (req, res) => {

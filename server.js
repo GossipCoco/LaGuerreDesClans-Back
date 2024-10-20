@@ -39,8 +39,7 @@ const Message = require('./app/routes/Message')
 const corsOptions = {
   // origin: '*',
   origin: [
-    'http://localhost:8081',
-    "http://192.168.1.14:8081",
+    'http://localhost:8081',    
   ],
   cors: {
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -49,6 +48,7 @@ const corsOptions = {
   }
 }
 app
+
   .use('*',cors(corsOptions))
   .use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
   .use(express.json())
